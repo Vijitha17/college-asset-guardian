@@ -23,7 +23,7 @@ import {
   Trash, 
   Eye,
   Share2,
-  Tool
+  Wrench
 } from "lucide-react";
 
 const StockList = () => {
@@ -145,7 +145,7 @@ const StockList = () => {
                       <span>Allocate Stock</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Tool className="mr-2 h-4 w-4" />
+                      <Wrench className="mr-2 h-4 w-4" />
                       <span>Send to Service</span>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />

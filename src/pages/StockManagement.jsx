@@ -11,7 +11,7 @@ import {
   Package, 
   Share2, 
   Settings,
-  Tool
+  Wrench
 } from "lucide-react";
 import StockList from "@/components/stock/StockList";
 import AllocatedStockList from "@/components/stock/AllocatedStockList";
@@ -119,7 +119,7 @@ const StockManagement = () => {
                 Stock to Service
               </TabsTrigger>
               <TabsTrigger value="inService" className="flex items-center">
-                <Tool className="h-4 w-4 mr-2" />
+                <Wrench className="h-4 w-4 mr-2" />
                 Stock in Service
               </TabsTrigger>
             </TabsList>

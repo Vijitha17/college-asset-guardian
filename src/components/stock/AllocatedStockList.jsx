@@ -21,7 +21,7 @@ import {
   MoreHorizontal, 
   Edit, 
   Eye,
-  Tool,
+  Wrench,
   RefreshCw
 } from "lucide-react";
 
@@ -162,7 +162,7 @@ const AllocatedStockList = () => {
                       <span>Update Status</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Tool className="mr-2 h-4 w-4" />
+                      <Wrench className="mr-2 h-4 w-4" />
                       <span>Send to Service</span>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
