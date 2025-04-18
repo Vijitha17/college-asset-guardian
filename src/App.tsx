@@ -13,6 +13,8 @@ import Requirements from "./pages/Requirements";
 import StockManagement from "./pages/StockManagement";
 import VendorManagement from "./pages/VendorManagement";
 import PurchaseManagement from "./pages/PurchaseManagement";
+import ExpenditureManagement from "./pages/ExpenditureManagement";
+import RequestApproval from "./pages/RequestApproval";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +34,8 @@ const App = () => (
           <Route path="/stock/*" element={<StockManagement />} />
           <Route path="/vendor/*" element={<VendorManagement />} />
           <Route path="/purchase/*" element={<PurchaseManagement />} />
+          <Route path="/expenditure/*" element={<ExpenditureManagement />} />
+          <Route path="/request/*" element={<RequestApproval />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
