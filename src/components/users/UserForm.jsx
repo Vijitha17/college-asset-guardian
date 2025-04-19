@@ -13,6 +13,7 @@ const UserForm = ({ onCancel }) => {
   const [selectedRole, setSelectedRole] = useState("");
   const [showCollegeField, setShowCollegeField] = useState(false);
   const [showDepartmentField, setShowDepartmentField] = useState(false);
+  const [selectedCollege, setSelectedCollege] = useState("");
   
   const handleRoleChange = (value) => {
     setSelectedRole(value);
@@ -32,6 +33,41 @@ const UserForm = ({ onCancel }) => {
       setShowCollegeField(true);
       setShowDepartmentField(true);
     }
+  };
+
+  // Sample college data
+  const colleges = [
+    { id: "engineering", name: "Engineering College" },
+    { id: "arts", name: "Arts College" },
+    { id: "science", name: "Science College" },
+    { id: "commerce", name: "Commerce College" }
+  ];
+
+  // Department data by college
+  const departmentsByCollege = {
+    engineering: [
+      { id: "cs", name: "Computer Science" },
+      { id: "it", name: "Information Technology" },
+      { id: "eee", name: "Electrical Engineering" },
+      { id: "mech", name: "Mechanical Engineering" },
+      { id: "civil", name: "Civil Engineering" }
+    ],
+    arts: [
+      { id: "english", name: "English" },
+      { id: "history", name: "History" },
+      { id: "philosophy", name: "Philosophy" }
+    ],
+    science: [
+      { id: "physics", name: "Physics" },
+      { id: "chemistry", name: "Chemistry" },
+      { id: "biology", name: "Biology" },
+      { id: "mathematics", name: "Mathematics" }
+    ],
+    commerce: [
+      { id: "accounting", name: "Accounting" },
+      { id: "economics", name: "Economics" },
+      { id: "business", name: "Business Administration" }
+    ]
   };
   
   return (
@@ -96,15 +132,14 @@ const UserForm = ({ onCancel }) => {
             <label htmlFor="college" className="text-sm font-medium">
               College
             </label>
-            <Select>
+            <Select onValueChange={setSelectedCollege}>
               <SelectTrigger id="college">
                 <SelectValue placeholder="Select college" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="engineering">Engineering College</SelectItem>
-                <SelectItem value="arts">Arts College</SelectItem>
-                <SelectItem value="science">Science College</SelectItem>
-                <SelectItem value="commerce">Commerce College</SelectItem>
+                {colleges.map(college => (
+                  <SelectItem key={college.id} value={college.id}>{college.name}</SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
@@ -120,15 +155,43 @@ const UserForm = ({ onCancel }) => {
                 <SelectValue placeholder="Select department" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="cs">Computer Science</SelectItem>
-                <SelectItem value="it">Information Technology</SelectItem>
-                <SelectItem value="eee">Electrical Engineering</SelectItem>
-                <SelectItem value="mech">Mechanical Engineering</SelectItem>
-                <SelectItem value="civil">Civil Engineering</SelectItem>
+                {selectedCollege && departmentsByCollege[selectedCollege] ? 
+                  departmentsByCollege[selectedCollege].map(dept => (
+                    <SelectItem key={dept.id} value={dept.id}>{dept.name}</SelectItem>
+                  )) : 
+                  <SelectItem value="none">Select a college first</SelectItem>
+                }
               </SelectContent>
             </Select>
           </div>
         )}
+
+        <div className="space-y-2">
+          <label htmlFor="phone" className="text-sm font-medium">
+            Phone Number
+          </label>
+          <input
+            id="phone"
+            type="tel"
+            className="w-full px-3 py-2 border rounded-md"
+            placeholder="Enter phone number"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label htmlFor="status" className="text-sm font-medium">
+            Status
+          </label>
+          <Select>
+            <SelectTrigger id="status">
+              <SelectValue placeholder="Select status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="active">Active</SelectItem>
+              <SelectItem value="inactive">Inactive</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
       
       <div className="flex justify-end space-x-2">

@@ -16,13 +16,20 @@ import {
 import StockList from "@/components/stock/StockList";
 import AllocatedStockList from "@/components/stock/AllocatedStockList";
 import ServiceStockList from "@/components/stock/ServiceStockList";
+import { useNavigate } from "react-router-dom";
 
 const StockManagement = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
+  const navigate = useNavigate();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+  
+  const handleAddStock = () => {
+    // Navigate to add stock form
+    navigate("/stock/add");
   };
   
   return (
@@ -54,7 +61,7 @@ const StockManagement = () => {
                 <Filter className="h-4 w-4" />
               </Button>
               
-              <Button>
+              <Button onClick={handleAddStock}>
                 <Plus className="h-4 w-4 mr-2" />
                 Add Stock
               </Button>

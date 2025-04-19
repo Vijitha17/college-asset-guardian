@@ -1,27 +1,29 @@
 
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { menuByRole } from "@/data/menuData";
-import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const Sidebar = ({ isOpen }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   // For demo purposes, using management_admin role
   const role = "management_admin";
   const menuItems = menuByRole[role] || [];
   
-  const [openMenus, setOpenMenus] = useState({});
-  
-  const toggleSubmenu = (title) => {
-    setOpenMenus(prev => ({
-      ...prev,
-      [title]: !prev[title]
-    }));
-  };
-  
   const isActive = (path) => {
     return location.pathname === path;
+  };
+  
+  const handleMenuClick = (item) => {
+    if (item.path) {
+      navigate(item.path);
+    }
+    
+    // If there's submenu, navigate to the first item in the submenu
+    if (item.submenu && item.submenu.length > 0) {
+      navigate(item.submenu[0].path);
+    }
   };
   
   return (
@@ -44,77 +46,25 @@ const Sidebar = ({ isOpen }) => {
         <nav className="px-2 space-y-1">
           {menuItems.map((item) => (
             <div key={item.title} className="py-1">
-              {item.submenu ? (
-                <>
-                  <button
-                    onClick={() => toggleSubmenu(item.title)}
-                    className={cn(
-                      "group flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                      "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                    )}
-                  >
-                    {item.icon && (
-                      <item.icon className={cn(
-                        "mr-3 h-5 w-5 flex-shrink-0",
-                        isOpen ? "" : "mx-auto"
-                      )} />
-                    )}
-                    {(isOpen || !item.icon) && (
-                      <>
-                        <span className="flex-1 truncate">{item.title}</span>
-                        <ChevronDown
-                          className={cn(
-                            "ml-auto h-4 w-4 shrink-0 transition-transform",
-                            openMenus[item.title] ? "rotate-180" : ""
-                          )}
-                        />
-                      </>
-                    )}
-                  </button>
-                  
-                  <div
-                    className={cn(
-                      "mt-1 space-y-1 pl-10",
-                      openMenus[item.title] && isOpen ? "block" : "hidden"
-                    )}
-                  >
-                    {item.submenu.map((subItem) => (
-                      <Link
-                        key={subItem.title}
-                        to={subItem.path}
-                        className={cn(
-                          "block px-3 py-2 text-sm font-medium rounded-md transition-colors",
-                          isActive(subItem.path)
-                            ? "bg-sidebar-primary text-sidebar-primary-foreground"
-                            : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                        )}
-                      >
-                        {subItem.title}
-                      </Link>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <Link
-                  to={item.path}
-                  className={cn(
-                    "group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                    isActive(item.path)
-                      ? "bg-sidebar-primary text-sidebar-primary-foreground"
-                      : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                  )}
-                >
-                  {item.icon && (
-                    <item.icon className={cn(
-                      "mr-3 h-5 w-5 flex-shrink-0",
-                      isOpen ? "" : "mx-auto"
-                    )} />
-                  )}
-                  {(isOpen || !item.icon) && (
-                    <span className="truncate">{item.title}</span>
-                  )}
-                </Link>
-              )}
+              <button
+                onClick={() => handleMenuClick(item)}
+                className={cn(
+                  "group flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  isActive(item.path)
+                    ? "bg-sidebar-primary text-sidebar-primary-foreground"
+                    : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                )}
+              >
+                {item.icon && (
+                  <item.icon className={cn(
+                    "mr-3 h-5 w-5 flex-shrink-0",
+                    isOpen ? "" : "mx-auto"
+                  )} />
+                )}
+                {(isOpen || !item.icon) && (
+                  <span className="flex-1 truncate">{item.title}</span>
+                )}
+              </button>
             </div>
           ))}
         </nav>
