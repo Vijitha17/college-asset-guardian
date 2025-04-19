@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { 
@@ -9,9 +8,23 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const AddStockForm = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted");
+    
+    toast({
+      title: "Stock added successfully",
+      description: "The new stock item has been added.",
+    });
+    
+    navigate("/stock");
+  };
   
   return (
     <div className="bg-white p-6 rounded-lg shadow">
@@ -22,7 +35,7 @@ const AddStockForm = () => {
         </Button>
       </div>
       
-      <form className="space-y-6">
+      <form className="space-y-6" onSubmit={handleSubmit}>
         <div className="grid gap-6 md:grid-cols-2">
           <div className="space-y-2">
             <label className="text-sm font-medium">Item Name</label>

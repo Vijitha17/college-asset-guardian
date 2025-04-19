@@ -29,7 +29,15 @@ const Sidebar = ({ isOpen }) => {
     
     // Special case for "Stock to Service"
     if (item.title === "Send to Service") {
+      console.log("Navigating to service form from sidebar");
       navigate("/stock/service");
+      return;
+    }
+    
+    // Special case for "Add Stock"
+    if (item.title === "Add Stock") {
+      console.log("Navigating to add stock form from sidebar");
+      navigate("/stock/add");
       return;
     }
     
