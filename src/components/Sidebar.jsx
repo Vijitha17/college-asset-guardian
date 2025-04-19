@@ -18,6 +18,19 @@ const Sidebar = ({ isOpen }) => {
   const handleMenuClick = (item) => {
     if (item.path) {
       navigate(item.path);
+      return;
+    }
+    
+    // Special case for Stock Management options
+    if (item.title === "Stock Management") {
+      navigate("/stock");
+      return;
+    }
+    
+    // Special case for "Stock to Service"
+    if (item.title === "Send to Service") {
+      navigate("/stock/service");
+      return;
     }
     
     // If there's submenu, navigate to the first item in the submenu

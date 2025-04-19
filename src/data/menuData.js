@@ -1,4 +1,3 @@
-
 import {
   LayoutDashboard,
   PackageOpen,
@@ -10,7 +9,8 @@ import {
   DollarSign,
   CheckCircle,
   History,
-  Settings
+  Settings,
+  Wrench
 } from "lucide-react";
 
 export const menuByRole = {
@@ -142,18 +142,19 @@ export const menuByRole = {
     {
       title: "Stock Management",
       icon: Box,
+      path: "/stock",
       submenu: [
         {
           title: "Current Stock",
-          path: "/stock/current"
+          path: "/stock"
         },
         {
           title: "Allocated Stock",
           path: "/stock/allocated"
         },
         {
-          title: "Stock to Service",
-          path: "/stock/to-service"
+          title: "Send to Service",
+          path: "/stock/service"
         },
         {
           title: "Stock in Service",
@@ -164,6 +165,7 @@ export const menuByRole = {
     {
       title: "Vendor Management",
       icon: Truck,
+      path: "/vendor",
       submenu: [
         {
           title: "Service Vendor",
@@ -178,6 +180,7 @@ export const menuByRole = {
     {
       title: "Purchase",
       icon: ShoppingCart,
+      path: "/purchase",
       submenu: [
         {
           title: "Create Purchase Request",
@@ -204,6 +207,7 @@ export const menuByRole = {
     {
       title: "User Management",
       icon: Users,
+      path: "/users",
       submenu: [
         {
           title: "Create User",
@@ -230,6 +234,7 @@ export const menuByRole = {
     {
       title: "Expenditure",
       icon: DollarSign,
+      path: "/expenditure",
       submenu: [
         {
           title: "Purchase Expenditure",
@@ -244,6 +249,7 @@ export const menuByRole = {
     {
       title: "Request",
       icon: History,
+      path: "/request",
       submenu: [
         {
           title: "Request History",
@@ -254,10 +260,11 @@ export const menuByRole = {
     {
       title: "Approval",
       icon: CheckCircle,
+      path: "/request",
       submenu: [
         {
           title: "Approve Request",
-          path: "/approval/request"
+          path: "/request/approval"
         }
       ]
     },

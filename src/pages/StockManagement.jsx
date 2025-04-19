@@ -31,6 +31,11 @@ const StockManagement = () => {
     // Navigate to add stock form
     navigate("/stock/add");
   };
+
+  const handleSendToService = () => {
+    // Navigate to service stock form
+    navigate("/stock/service");
+  };
   
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -64,6 +69,11 @@ const StockManagement = () => {
               <Button onClick={handleAddStock}>
                 <Plus className="h-4 w-4 mr-2" />
                 Add Stock
+              </Button>
+
+              <Button onClick={handleSendToService} variant="outline">
+                <Wrench className="h-4 w-4 mr-2" />
+                Send to Service
               </Button>
             </div>
           </div>
@@ -121,9 +131,9 @@ const StockManagement = () => {
                 <Share2 className="h-4 w-4 mr-2" />
                 Allocated Stock
               </TabsTrigger>
-              <TabsTrigger value="toService" className="flex items-center">
+              <TabsTrigger value="toService" className="flex items-center" onClick={handleSendToService}>
                 <Settings className="h-4 w-4 mr-2" />
-                Stock to Service
+                Send to Service
               </TabsTrigger>
               <TabsTrigger value="inService" className="flex items-center">
                 <Wrench className="h-4 w-4 mr-2" />
@@ -140,7 +150,12 @@ const StockManagement = () => {
             </TabsContent>
             
             <TabsContent value="toService" className="space-y-4">
-              <ServiceStockList type="to-service" />
+              <div className="text-center py-8">
+                <Button onClick={handleSendToService} size="lg">
+                  <Wrench className="h-5 w-5 mr-2" />
+                  Go to Send to Service Form
+                </Button>
+              </div>
             </TabsContent>
             
             <TabsContent value="inService" className="space-y-4">

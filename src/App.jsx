@@ -18,6 +18,7 @@ import ExpenditureManagement from "./pages/ExpenditureManagement";
 import RequestApproval from "./pages/RequestApproval";
 import AddStockForm from "./components/stock/AddStockForm";
 import ServiceStockForm from "./components/stock/ServiceStockForm";
+import CreatePurchaseRequest from "./components/purchase/CreatePurchaseRequest";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,7 @@ const App = () => (
           <Route path="/stock/service" element={<ServiceStockForm />} />
           <Route path="/vendor/*" element={<VendorManagement />} />
           <Route path="/purchase/*" element={<PurchaseManagement />} />
+          <Route path="/purchase/create-request" element={<CreatePurchaseRequest />} />
           <Route path="/expenditure/*" element={<ExpenditureManagement />} />
           <Route path="/request/*" element={<RequestApproval />} />
           <Route path="*" element={<NotFound />} />

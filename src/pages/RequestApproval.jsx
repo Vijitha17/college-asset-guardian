@@ -8,48 +8,83 @@ import {
   Search, 
   ClipboardList,
   History,
-  Plus
+  Plus,
+  CheckCircle,
+  XCircle,
+  Eye
 } from "lucide-react";
-import RequestList from "@/components/requests/RequestList";
-import ApprovalList from "@/components/requests/ApprovalList";
-import ApprovalForm from "@/components/approval/ApprovalForm";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 import ApprovalDetail from "@/components/approval/ApprovalDetail";
+import ApprovalForm from "@/components/approval/ApprovalForm";
 
 const RequestApproval = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isCreatingRequest, setIsCreatingRequest] = useState(false);
   const [selectedApproval, setSelectedApproval] = useState(null);
+  const [requests, setRequests] = useState([
+    {
+      id: "REQ001",
+      type: "Purchase",
+      department: "Computer Science",
+      description: "New Computers for the lab to replace the old equipment. Urgent need for the next semester.",
+      requestedBy: "John Doe",
+      date: "2025-04-15",
+      status: "pending",
+      items: "10 x Desktop Computers",
+      amount: 15000,
+      vendor: "TechSupplies Ltd."
+    },
+    {
+      id: "REQ002",
+      type: "Service",
+      department: "Physics",
+      description: "Equipment Maintenance",
+      requestedBy: "Jane Smith",
+      date: "2025-04-16",
+      status: "pending",
+      items: "5 x Lab Equipment Service",
+      amount: 3500,
+      vendor: "Lab Services Co."
+    },
+    {
+      id: "REQ003",
+      type: "Purchase",
+      department: "Chemistry",
+      description: "Lab Supplies",
+      requestedBy: "Alex Brown",
+      date: "2025-04-18",
+      status: "pending",
+      items: "Various chemicals and equipment",
+      amount: 7800,
+      vendor: "Science Supplies Inc."
+    }
+  ]);
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
-
-  // Sample data for demo
-  const sampleApproval = {
-    id: "REQ001",
-    type: "Purchase",
-    department: "Computer Science",
-    description: "New Computers for the lab to replace the old equipment. Urgent need for the next semester.",
-    requestedBy: "John Doe",
-    date: "2025-04-15",
-    status: "pending",
-    items: "10 x Desktop Computers",
-    amount: 15000,
-    vendor: "TechSupplies Ltd."
+  
+  const handleApprove = (requestId) => {
+    // In a real app, you would update API
+    setRequests(requests.map(req => 
+      req.id === requestId ? {...req, status: "approved"} : req
+    ));
+    
+    if (selectedApproval && selectedApproval.id === requestId) {
+      setSelectedApproval({...selectedApproval, status: "approved"});
+    }
   };
   
-  const handleApprove = () => {
-    // In a real app, you would update API and state
-    console.log("Approving request:", selectedApproval.id);
-    // Demo: just go back to the list view
-    setSelectedApproval(null);
-  };
-  
-  const handleReject = () => {
-    // In a real app, you would update API and state
-    console.log("Rejecting request:", selectedApproval.id);
-    // Demo: just go back to the list view
-    setSelectedApproval(null);
+  const handleReject = (requestId) => {
+    // In a real app, you would update API
+    setRequests(requests.map(req => 
+      req.id === requestId ? {...req, status: "rejected"} : req
+    ));
+    
+    if (selectedApproval && selectedApproval.id === requestId) {
+      setSelectedApproval({...selectedApproval, status: "rejected"});
+    }
   };
   
   return (
@@ -64,8 +99,8 @@ const RequestApproval = () => {
             <ApprovalDetail 
               approval={selectedApproval} 
               onBack={() => setSelectedApproval(null)}
-              onApprove={handleApprove}
-              onReject={handleReject}
+              onApprove={() => handleApprove(selectedApproval.id)}
+              onReject={() => handleReject(selectedApproval.id)}
             />
           ) : (
             <>
@@ -102,7 +137,7 @@ const RequestApproval = () => {
               {isCreatingRequest ? (
                 <ApprovalForm onCancel={() => setIsCreatingRequest(false)} />
               ) : (
-                <Tabs defaultValue="requests" className="space-y-4">
+                <Tabs defaultValue="approvals" className="space-y-4">
                   <TabsList>
                     <TabsTrigger value="requests" className="flex items-center">
                       <ClipboardList className="h-4 w-4 mr-2" />
@@ -115,11 +150,91 @@ const RequestApproval = () => {
                   </TabsList>
                   
                   <TabsContent value="requests" className="space-y-4">
-                    <RequestList onView={() => setSelectedApproval(sampleApproval)} />
+                    <div className="bg-white rounded-lg shadow">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>ID</TableHead>
+                            <TableHead>Type</TableHead>
+                            <TableHead>Department</TableHead>
+                            <TableHead>Description</TableHead>
+                            <TableHead>Requested By</TableHead>
+                            <TableHead>Date</TableHead>
+                            <TableHead>Status</TableHead>
+                            <TableHead>Actions</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {requests.filter(req => req.status === "pending").map((req) => (
+                            <TableRow key={req.id}>
+                              <TableCell className="font-medium">{req.id}</TableCell>
+                              <TableCell>{req.type}</TableCell>
+                              <TableCell>{req.department}</TableCell>
+                              <TableCell>{req.description}</TableCell>
+                              <TableCell>{req.requestedBy}</TableCell>
+                              <TableCell>{req.date}</TableCell>
+                              <TableCell>
+                                <Badge variant={req.status === "approved" ? "success" : "warning"}>
+                                  {req.status}
+                                </Badge>
+                              </TableCell>
+                              <TableCell className="space-x-2">
+                                <Button variant="ghost" size="icon" onClick={() => setSelectedApproval(req)}>
+                                  <Eye className="h-4 w-4" />
+                                </Button>
+                                <Button variant="ghost" size="icon" className="text-green-500" onClick={() => handleApprove(req.id)}>
+                                  <CheckCircle className="h-4 w-4" />
+                                </Button>
+                                <Button variant="ghost" size="icon" className="text-red-500" onClick={() => handleReject(req.id)}>
+                                  <XCircle className="h-4 w-4" />
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
                   </TabsContent>
                   
                   <TabsContent value="approvals" className="space-y-4">
-                    <ApprovalList onView={() => setSelectedApproval(sampleApproval)} />
+                    <div className="bg-white rounded-lg shadow">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>ID</TableHead>
+                            <TableHead>Type</TableHead>
+                            <TableHead>Department</TableHead>
+                            <TableHead>Description</TableHead>
+                            <TableHead>Submitted By</TableHead>
+                            <TableHead>Date</TableHead>
+                            <TableHead>Status</TableHead>
+                            <TableHead>Actions</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {requests.filter(req => req.status !== "pending").map((req) => (
+                            <TableRow key={req.id}>
+                              <TableCell className="font-medium">{req.id}</TableCell>
+                              <TableCell>{req.type}</TableCell>
+                              <TableCell>{req.department}</TableCell>
+                              <TableCell>{req.description}</TableCell>
+                              <TableCell>{req.requestedBy}</TableCell>
+                              <TableCell>{req.date}</TableCell>
+                              <TableCell>
+                                <Badge variant={req.status === "approved" ? "success" : "destructive"}>
+                                  {req.status}
+                                </Badge>
+                              </TableCell>
+                              <TableCell className="space-x-2">
+                                <Button variant="ghost" size="icon" onClick={() => setSelectedApproval(req)}>
+                                  <Eye className="h-4 w-4" />
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
                   </TabsContent>
                 </Tabs>
               )}

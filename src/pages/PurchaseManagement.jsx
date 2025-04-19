@@ -10,18 +10,25 @@ import {
   CheckCircle, 
   History,
   Plus,
-  Search
+  Search,
+  FileEdit
 } from "lucide-react";
 import PurchaseRequestList from "@/components/purchase/PurchaseRequestList";
 import PurchaseList from "@/components/purchase/PurchaseList";
 import PurchaseForm from "@/components/purchase/PurchaseForm";
+import { useNavigate } from "react-router-dom";
 
 const PurchaseManagement = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
+  const navigate = useNavigate();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleCreatePurchaseRequest = () => {
+    navigate('/purchase/create-request');
   };
   
   return (
@@ -46,10 +53,17 @@ const PurchaseManagement = () => {
               </div>
               
               {!isCreating && (
-                <Button onClick={() => setIsCreating(true)}>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Create Purchase
-                </Button>
+                <>
+                  <Button onClick={() => setIsCreating(true)}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Create Purchase
+                  </Button>
+                  
+                  <Button onClick={handleCreatePurchaseRequest} variant="outline">
+                    <FileEdit className="h-4 w-4 mr-2" />
+                    Create Request
+                  </Button>
+                </>
               )}
               
               {isCreating && (
@@ -87,6 +101,12 @@ const PurchaseManagement = () => {
               </TabsList>
               
               <TabsContent value="requests" className="space-y-4">
+                <div className="flex justify-end mb-4">
+                  <Button onClick={handleCreatePurchaseRequest}>
+                    <Plus className="h-4 w-4 mr-2" />
+                    Create Request
+                  </Button>
+                </div>
                 <PurchaseRequestList />
               </TabsContent>
               
