@@ -1,5 +1,5 @@
-
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { 
   Table, 
   TableHeader, 
@@ -27,7 +27,8 @@ import {
 } from "lucide-react";
 
 const StockList = () => {
-  // Sample data - in a real app, this would come from an API
+  const navigate = useNavigate();
+  
   const stockItems = [
     { 
       id: "STK001", 
@@ -132,19 +133,19 @@ const StockList = () => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate(`/stock/view/${item.id}`)}>
                       <Eye className="mr-2 h-4 w-4" />
                       <span>View Details</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate(`/stock/edit/${item.id}`)}>
                       <Edit className="mr-2 h-4 w-4" />
                       <span>Edit Stock</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate(`/stock/allocate/${item.id}`)}>
                       <Share2 className="mr-2 h-4 w-4" />
                       <span>Allocate Stock</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate(`/stock/service/${item.id}`)}>
                       <Wrench className="mr-2 h-4 w-4" />
                       <span>Send to Service</span>
                     </DropdownMenuItem>

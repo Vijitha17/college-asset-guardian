@@ -10,7 +10,9 @@ import {
   CheckCircle,
   History,
   Settings,
-  Wrench
+  Wrench,
+  TrendingUp,
+  TrendingDown
 } from "lucide-react";
 
 export const menuByRole = {
@@ -149,16 +151,8 @@ export const menuByRole = {
           path: "/stock"
         },
         {
-          title: "Allocated Stock",
-          path: "/stock/allocated"
-        },
-        {
           title: "Send to Service",
           path: "/stock/service"
-        },
-        {
-          title: "Stock in Service",
-          path: "/stock/in-service"
         }
       ]
     },
@@ -247,24 +241,25 @@ export const menuByRole = {
       ]
     },
     {
-      title: "Request",
+      title: "Request & Approval",
       icon: History,
       path: "/request",
       submenu: [
         {
+          title: "Requests",
+          path: "/request/list"
+        },
+        {
+          title: "Approvals",
+          path: "/request/approval"
+        },
+        {
           title: "Request History",
           path: "/request/history"
-        }
-      ]
-    },
-    {
-      title: "Approval",
-      icon: CheckCircle,
-      path: "/request",
-      submenu: [
+        },
         {
-          title: "Approve Request",
-          path: "/request/approval"
+          title: "Approval History",
+          path: "/request/approval-history"
         }
       ]
     },
