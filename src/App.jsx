@@ -29,6 +29,12 @@ import StockView from "./pages/StockView";
 import VendorView from "./pages/VendorView";
 import AddCollegeForm from "./pages/AddCollegeForm";
 import AddDepartmentForm from "./pages/AddDepartmentForm";
+import RequestInventory from "./pages/stock/movement/RequestInventory";
+import RequestStatus from "./pages/stock/movement/RequestStatus";
+import IncomingRequests from "./pages/stock/movement/IncomingRequests";
+import HandoverManagement from "./pages/stock/movement/HandoverManagement";
+import ReturnsManagement from "./pages/stock/movement/ReturnsManagement";
+import MovementHistory from "./pages/stock/movement/MovementHistory";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +63,12 @@ const App = () => (
           <Route path="/stock/allocate/:id" element={<AllocateStockForm />} />
           <Route path="/stock/service" element={<ServiceStockForm />} />
           <Route path="/stock/service/:id" element={<ServiceStockForm />} />
+          <Route path="/stock/movement/request-inventory" element={<RequestInventory />} />
+          <Route path="/stock/movement/request-status" element={<RequestStatus />} />
+          <Route path="/stock/movement/incoming-requests" element={<IncomingRequests />} />
+          <Route path="/stock/movement/handover" element={<HandoverManagement />} />
+          <Route path="/stock/movement/returns" element={<ReturnsManagement />} />
+          <Route path="/stock/movement/history" element={<MovementHistory />} />
           <Route path="/vendor/*" element={<VendorManagement />} />
           <Route path="/vendor/view/:id" element={<VendorView />} />
           <Route path="/purchase/*" element={<PurchaseManagement />} />

@@ -13,7 +13,12 @@ import {
   Settings,
   Wrench,
   TrendingUp,
-  TrendingDown
+  TrendingDown,
+  Inbox,
+  Mail,
+  List,
+  ArrowDown,
+  ArrowUp
 } from "lucide-react";
 
 export const menuByRole = {
@@ -25,6 +30,7 @@ export const menuByRole = {
     },
     {
       title: "Requirement",
+      path: "/requirement/current",
       icon: PackageOpen,
       submenu: [
         {
@@ -39,6 +45,7 @@ export const menuByRole = {
     },
     {
       title: "Stock Management",
+      path: "/stock",
       icon: Box,
       submenu: [
         {
@@ -57,6 +64,7 @@ export const menuByRole = {
     },
     {
       title: "Vendor Management",
+      path: "/vendor/service",
       icon: Truck,
       submenu: [
         {
@@ -71,6 +79,7 @@ export const menuByRole = {
     },
     {
       title: "Purchase",
+      path: "/purchase/approve",
       icon: ShoppingCart,
       submenu: [
         {
@@ -89,6 +98,7 @@ export const menuByRole = {
     },
     {
       title: "User Management",
+      path: "/users/list",
       icon: Users,
       submenu: [
         {
@@ -99,6 +109,7 @@ export const menuByRole = {
     },
     {
       title: "Expenditure",
+      path: "/expenditure/purchase",
       icon: DollarSign,
       submenu: [
         {
@@ -126,6 +137,7 @@ export const menuByRole = {
     },
     {
       title: "Requirement",
+      path: "/requirement/create",
       icon: PackageOpen,
       submenu: [
         {
@@ -144,6 +156,7 @@ export const menuByRole = {
     },
     {
       title: "Stock Management",
+      path: "/stock",
       icon: Box,
       submenu: [
         {
@@ -170,6 +183,7 @@ export const menuByRole = {
     },
     {
       title: "Vendor Management",
+      path: "/vendor/add",
       icon: Truck,
       submenu: [
         {
@@ -188,6 +202,7 @@ export const menuByRole = {
     },
     {
       title: "Purchase",
+      path: "/purchase/create-request",
       icon: ShoppingCart,
       submenu: [
         {
@@ -218,6 +233,7 @@ export const menuByRole = {
     },
     {
       title: "User Management",
+      path: "/users/create",
       icon: Users,
       submenu: [
         {
@@ -244,6 +260,7 @@ export const menuByRole = {
     },
     {
       title: "Expenditure",
+      path: "/expenditure/add",
       icon: DollarSign,
       submenu: [
         {
@@ -262,6 +279,7 @@ export const menuByRole = {
     },
     {
       title: "Request & Approval",
+      path: "/request/history",
       icon: History,
       submenu: [
         {
@@ -293,6 +311,7 @@ export const menuByRole = {
     },
     {
       title: "Requirement",
+      path: "/requirement/create",
       icon: PackageOpen,
       submenu: [
         {
@@ -311,6 +330,7 @@ export const menuByRole = {
     },
     {
       title: "Stock Management",
+      path: "/stock/allocated",
       icon: Box,
       submenu: [
         {
@@ -320,7 +340,39 @@ export const menuByRole = {
       ]
     },
     {
+      title: "Stock Movement",
+      path: "/stock/movement/request-inventory",
+      icon: ArrowDown,
+      submenu: [
+        {
+          title: "Request Inventory",
+          path: "/stock/movement/request-inventory"
+        },
+        {
+          title: "Request Status",
+          path: "/stock/movement/request-status"
+        },
+        {
+          title: "Incoming Requests",
+          path: "/stock/movement/incoming-requests"
+        },
+        {
+          title: "Handover Management",
+          path: "/stock/movement/handover"
+        },
+        {
+          title: "Returns Management",
+          path: "/stock/movement/returns"
+        },
+        {
+          title: "Movement History",
+          path: "/stock/movement/history"
+        }
+      ]
+    },
+    {
       title: "User Management",
+      path: "/users/list",
       icon: Users,
       submenu: [
         {
@@ -331,6 +383,7 @@ export const menuByRole = {
     },
     {
       title: "Request & Approval",
+      path: "/request/create",
       icon: History,
       submenu: [
         {
@@ -366,6 +419,7 @@ export const menuByRole = {
     },
     {
       title: "Requirement",
+      path: "/requirement/create",
       icon: PackageOpen,
       submenu: [
         {
@@ -384,6 +438,7 @@ export const menuByRole = {
     },
     {
       title: "Stock Management",
+      path: "/stock/allocated",
       icon: Box,
       submenu: [
         {
@@ -393,7 +448,39 @@ export const menuByRole = {
       ]
     },
     {
+      title: "Stock Movement",
+      path: "/stock/movement/request-inventory",
+      icon: ArrowDown,
+      submenu: [
+        {
+          title: "Request Inventory",
+          path: "/stock/movement/request-inventory"
+        },
+        {
+          title: "Request Status",
+          path: "/stock/movement/request-status"
+        },
+        {
+          title: "Incoming Requests",
+          path: "/stock/movement/incoming-requests"
+        },
+        {
+          title: "Handover Management",
+          path: "/stock/movement/handover"
+        },
+        {
+          title: "Returns Management",
+          path: "/stock/movement/returns"
+        },
+        {
+          title: "Movement History",
+          path: "/stock/movement/history"
+        }
+      ]
+    },
+    {
       title: "User Management",
+      path: "/users/list",
       icon: Users,
       submenu: [
         {
@@ -404,6 +491,7 @@ export const menuByRole = {
     },
     {
       title: "Request & Approval",
+      path: "/request/create",
       icon: History,
       submenu: [
         {
@@ -439,6 +527,7 @@ export const menuByRole = {
     },
     {
       title: "Requirement",
+      path: "/requirement/create",
       icon: PackageOpen,
       submenu: [
         {
@@ -457,6 +546,7 @@ export const menuByRole = {
     },
     {
       title: "Stock Management",
+      path: "/stock/allocated",
       icon: Box,
       submenu: [
         {
@@ -466,7 +556,39 @@ export const menuByRole = {
       ]
     },
     {
+      title: "Stock Movement",
+      path: "/stock/movement/request-inventory",
+      icon: ArrowDown,
+      submenu: [
+        {
+          title: "Request Inventory",
+          path: "/stock/movement/request-inventory"
+        },
+        {
+          title: "Request Status",
+          path: "/stock/movement/request-status"
+        },
+        {
+          title: "Incoming Requests",
+          path: "/stock/movement/incoming-requests"
+        },
+        {
+          title: "Handover Management",
+          path: "/stock/movement/handover"
+        },
+        {
+          title: "Returns Management",
+          path: "/stock/movement/returns"
+        },
+        {
+          title: "Movement History",
+          path: "/stock/movement/history"
+        }
+      ]
+    },
+    {
       title: "User Management",
+      path: "/users/list",
       icon: Users,
       submenu: [
         {
@@ -477,6 +599,7 @@ export const menuByRole = {
     },
     {
       title: "Request",
+      path: "/request/create",
       icon: History,
       submenu: [
         {
