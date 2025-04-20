@@ -1,3 +1,4 @@
+
 import {
   LayoutDashboard,
   PackageOpen,
@@ -42,7 +43,7 @@ export const menuByRole = {
       submenu: [
         {
           title: "Current Stock",
-          path: "/stock/current"
+          path: "/stock"
         },
         {
           title: "Allocated Stock",
@@ -144,23 +145,37 @@ export const menuByRole = {
     {
       title: "Stock Management",
       icon: Box,
-      path: "/stock",
       submenu: [
+        {
+          title: "Add Stock",
+          path: "/stock/add"
+        },
         {
           title: "Current Stock",
           path: "/stock"
         },
         {
+          title: "Allocated Stock",
+          path: "/stock/allocated"
+        },
+        {
           title: "Send to Service",
           path: "/stock/service"
+        },
+        {
+          title: "Stock in Service",
+          path: "/stock/in-service"
         }
       ]
     },
     {
       title: "Vendor Management",
       icon: Truck,
-      path: "/vendor",
       submenu: [
+        {
+          title: "Add Vendor",
+          path: "/vendor/add"
+        },
         {
           title: "Service Vendor",
           path: "/vendor/service"
@@ -174,19 +189,22 @@ export const menuByRole = {
     {
       title: "Purchase",
       icon: ShoppingCart,
-      path: "/purchase",
       submenu: [
         {
           title: "Create Purchase Request",
           path: "/purchase/create-request"
         },
         {
+          title: "Purchase Request List",
+          path: "/purchase/request-list"
+        },
+        {
           title: "Create Purchase",
           path: "/purchase/create"
         },
         {
-          title: "Purchase Request Status",
-          path: "/purchase/request-status"
+          title: "Purchase Status",
+          path: "/purchase/status"
         },
         {
           title: "Purchased List",
@@ -201,7 +219,6 @@ export const menuByRole = {
     {
       title: "User Management",
       icon: Users,
-      path: "/users",
       submenu: [
         {
           title: "Create User",
@@ -228,8 +245,11 @@ export const menuByRole = {
     {
       title: "Expenditure",
       icon: DollarSign,
-      path: "/expenditure",
       submenu: [
+        {
+          title: "Add Expenditure",
+          path: "/expenditure/add"
+        },
         {
           title: "Purchase Expenditure",
           path: "/expenditure/purchase"
@@ -243,19 +263,14 @@ export const menuByRole = {
     {
       title: "Request & Approval",
       icon: History,
-      path: "/request",
       submenu: [
-        {
-          title: "Requests",
-          path: "/request/list"
-        },
-        {
-          title: "Approvals",
-          path: "/request/approval"
-        },
         {
           title: "Request History",
           path: "/request/history"
+        },
+        {
+          title: "Approve Request",
+          path: "/request/approval"
         },
         {
           title: "Approval History",
@@ -315,7 +330,7 @@ export const menuByRole = {
       ]
     },
     {
-      title: "Request",
+      title: "Request & Approval",
       icon: History,
       submenu: [
         {
@@ -325,16 +340,14 @@ export const menuByRole = {
         {
           title: "Request History",
           path: "/request/history"
-        }
-      ]
-    },
-    {
-      title: "Approval",
-      icon: CheckCircle,
-      submenu: [
+        },
         {
           title: "Approve Request",
-          path: "/approval/request"
+          path: "/request/approval"
+        },
+        {
+          title: "Approval History",
+          path: "/request/approval-history"
         }
       ]
     },
@@ -390,7 +403,7 @@ export const menuByRole = {
       ]
     },
     {
-      title: "Request",
+      title: "Request & Approval",
       icon: History,
       submenu: [
         {
@@ -400,16 +413,14 @@ export const menuByRole = {
         {
           title: "Request History",
           path: "/request/history"
-        }
-      ]
-    },
-    {
-      title: "Approval",
-      icon: CheckCircle,
-      submenu: [
+        },
         {
           title: "Approve Request",
-          path: "/approval/request"
+          path: "/request/approval"
+        },
+        {
+          title: "Approval History",
+          path: "/request/approval-history"
         }
       ]
     },
@@ -473,8 +484,12 @@ export const menuByRole = {
           path: "/request/create"
         },
         {
-          title: "Request History",
-          path: "/request/history"
+          title: "Request List",
+          path: "/request/list"
+        },
+        {
+          title: "Approval History",
+          path: "/request/approval-history"
         }
       ]
     },

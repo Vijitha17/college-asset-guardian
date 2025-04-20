@@ -31,7 +31,7 @@ const Index = () => {
           
           <Link to="/login">
             <Button size="lg" className="bg-college-700 hover:bg-college-800 text-white">
-              Click here to Login
+              Login to System
             </Button>
           </Link>
         </div>

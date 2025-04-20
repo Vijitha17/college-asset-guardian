@@ -12,12 +12,24 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { 
+  Eye, 
+  EyeOff, 
+  ArrowLeft 
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -27,10 +39,10 @@ const Login = () => {
     e.preventDefault();
     
     // Validate form
-    if (!email || !password) {
+    if (!email || !password || !role) {
       toast({
         title: "Error",
-        description: "Please enter both email and password",
+        description: "Please enter email, password and select a role",
         variant: "destructive",
       });
       return;
@@ -39,14 +51,16 @@ const Login = () => {
     // Mock login - In a real app, this would call an API
     setIsLoading(true);
     
+    // Store role in localStorage for sidebar menu
+    localStorage.setItem("userRole", role);
+    
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
       
-      // For demo purposes, just navigate to dashboard
       toast({
         title: "Success",
-        description: "Welcome back!",
+        description: `Welcome back! Logged in as ${role}`,
       });
       
       navigate("/dashboard");
@@ -118,6 +132,22 @@ const Login = () => {
                     )}
                   </button>
                 </div>
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="role">Login as</Label>
+                <Select onValueChange={setRole} value={role} required>
+                  <SelectTrigger id="role">
+                    <SelectValue placeholder="Select your role" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="management_people">Management People</SelectItem>
+                    <SelectItem value="management_admin">Management Admin</SelectItem>
+                    <SelectItem value="principal">Principal</SelectItem>
+                    <SelectItem value="hod">HOD</SelectItem>
+                    <SelectItem value="department_admin">Department Admin</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </CardContent>
             

@@ -1,182 +1,410 @@
 
 import React, { useState } from "react";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Plus, Minus, Trash } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger
+} from "@/components/ui/tabs";
+import { 
+  User, 
+  Users, 
+  Microscope,
+  Plus,
+  Trash2
+} from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const RequirementForm = ({ onCancel }) => {
-  const [items, setItems] = useState([
-    { name: "", category: "electronics", quantity: 1 }
-  ]);
+  const { toast } = useToast();
+  const [academicYear, setAcademicYear] = useState("2024-2025");
+  const [college, setCollege] = useState("");
+  const [department, setDepartment] = useState("");
+  const [category, setCategory] = useState("students");
   
-  const handleAddItem = () => {
-    setItems([...items, { name: "", category: "electronics", quantity: 1 }]);
-  };
+  // Student specific fields
+  const [studentYear, setStudentYear] = useState("");
+  const [studentCount, setStudentCount] = useState("");
+  const [studentInfraReq, setStudentInfraReq] = useState("");
+  const [studentElectronicsReq, setStudentElectronicsReq] = useState("");
+  const [studentStationaryReq, setStudentStationaryReq] = useState("");
   
-  const handleRemoveItem = (index) => {
-    if (items.length === 1) return;
-    const newItems = [...items];
-    newItems.splice(index, 1);
-    setItems(newItems);
-  };
+  // Faculty specific fields
+  const [facultyCount, setFacultyCount] = useState("");
+  const [facultyInfraReq, setFacultyInfraReq] = useState("");
+  const [facultyElectronicsReq, setFacultyElectronicsReq] = useState("");
+  const [facultyStationaryReq, setFacultyStationaryReq] = useState("");
   
-  const handleItemChange = (index, field, value) => {
-    const newItems = [...items];
-    newItems[index][field] = value;
-    setItems(newItems);
+  // Lab specific fields
+  const [labName, setLabName] = useState("");
+  const [labCapacity, setLabCapacity] = useState("");
+  const [labInfraReq, setLabInfraReq] = useState("");
+  const [labSystemReq, setLabSystemReq] = useState("");
+  const [labElectronicsReq, setLabElectronicsReq] = useState("");
+  const [labEquipmentReq, setLabEquipmentReq] = useState("");
+  const [labStationaryReq, setLabStationaryReq] = useState("");
+  
+  // Sample data for dropdowns
+  const colleges = [
+    { value: "engineering", label: "Engineering College" },
+    { value: "science", label: "Science College" },
+    { value: "arts", label: "Arts College" },
+    { value: "commerce", label: "Commerce College" },
+  ];
+  
+  const departments = [
+    { value: "computer_science", label: "Computer Science" },
+    { value: "electrical", label: "Electrical Engineering" },
+    { value: "mechanical", label: "Mechanical Engineering" },
+    { value: "civil", label: "Civil Engineering" },
+    { value: "physics", label: "Physics" },
+    { value: "chemistry", label: "Chemistry" },
+    { value: "mathematics", label: "Mathematics" },
+  ];
+  
+  const academicYears = [
+    { value: "2022-2023", label: "2022-2023" },
+    { value: "2023-2024", label: "2023-2024" },
+    { value: "2024-2025", label: "2024-2025" },
+    { value: "2025-2026", label: "2025-2026" },
+  ];
+  
+  const studentYears = [
+    { value: "first_year", label: "First Year" },
+    { value: "second_year", label: "Second Year" },
+    { value: "third_year", label: "Third Year" },
+    { value: "fourth_year", label: "Fourth Year" },
+  ];
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Validate common fields
+    if (!academicYear || !college || !department) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Validate category specific fields
+    if (category === "students") {
+      if (!studentYear || !studentCount) {
+        toast({
+          title: "Missing Information",
+          description: "Please fill in all required student fields",
+          variant: "destructive",
+        });
+        return;
+      }
+    } else if (category === "faculty") {
+      if (!facultyCount) {
+        toast({
+          title: "Missing Information",
+          description: "Please fill in all required faculty fields",
+          variant: "destructive",
+        });
+        return;
+      }
+    } else if (category === "lab") {
+      if (!labName || !labCapacity) {
+        toast({
+          title: "Missing Information",
+          description: "Please fill in all required lab fields",
+          variant: "destructive",
+        });
+        return;
+      }
+    }
+    
+    // Process the form data
+    toast({
+      title: "Requirement Created",
+      description: "The requirement has been successfully created",
+    });
+    
+    // Reset form and/or redirect
+    onCancel();
   };
   
   return (
-    <form className="space-y-6">
-      <div className="grid gap-6 md:grid-cols-2">
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="space-y-2">
-          <label htmlFor="college" className="text-sm font-medium">
-            College
-          </label>
-          <Select>
-            <SelectTrigger id="college">
-              <SelectValue placeholder="Select college" />
+          <Label htmlFor="academicYear">Academic Year</Label>
+          <Select onValueChange={setAcademicYear} value={academicYear} required>
+            <SelectTrigger id="academicYear">
+              <SelectValue placeholder="Select Academic Year" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="engineering">Engineering College</SelectItem>
-              <SelectItem value="arts">Arts College</SelectItem>
-              <SelectItem value="science">Science College</SelectItem>
-              <SelectItem value="commerce">Commerce College</SelectItem>
+              {academicYears.map(year => (
+                <SelectItem key={year.value} value={year.value}>{year.label}</SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
         
         <div className="space-y-2">
-          <label htmlFor="department" className="text-sm font-medium">
-            Department
-          </label>
-          <Select>
-            <SelectTrigger id="department">
-              <SelectValue placeholder="Select department" />
+          <Label htmlFor="college">College</Label>
+          <Select onValueChange={setCollege} value={college} required>
+            <SelectTrigger id="college">
+              <SelectValue placeholder="Select College" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="cs">Computer Science</SelectItem>
-              <SelectItem value="it">Information Technology</SelectItem>
-              <SelectItem value="eee">Electrical Engineering</SelectItem>
-              <SelectItem value="mech">Mechanical Engineering</SelectItem>
-              <SelectItem value="civil">Civil Engineering</SelectItem>
+              {colleges.map(college => (
+                <SelectItem key={college.value} value={college.value}>{college.label}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        
+        <div className="space-y-2">
+          <Label htmlFor="department">Department</Label>
+          <Select onValueChange={setDepartment} value={department} required>
+            <SelectTrigger id="department">
+              <SelectValue placeholder="Select Department" />
+            </SelectTrigger>
+            <SelectContent>
+              {departments.map(dept => (
+                <SelectItem key={dept.value} value={dept.value}>{dept.label}</SelectItem>
+              ))}
             </SelectContent>
           </Select>
         </div>
       </div>
       
-      <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <label className="text-sm font-medium">Requirement Items</label>
-          <Button type="button" size="sm" onClick={handleAddItem}>
-            <Plus className="h-4 w-4 mr-2" />
-            Add Item
-          </Button>
-        </div>
-        
-        <div className="space-y-4">
-          {items.map((item, index) => (
-            <div key={index} className="flex items-end gap-4 p-4 border rounded-md bg-gray-50">
-              <div className="space-y-2 flex-1">
-                <label className="text-sm font-medium">Item Name</label>
-                <input
-                  type="text"
-                  value={item.name}
-                  onChange={(e) => handleItemChange(index, "name", e.target.value)}
-                  className="w-full px-3 py-2 border rounded-md"
-                  placeholder="Enter item name"
-                />
-              </div>
-              
-              <div className="space-y-2 w-36">
-                <label className="text-sm font-medium">Category</label>
-                <Select 
-                  value={item.category}
-                  onValueChange={(value) => handleItemChange(index, "category", value)}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
+      <div className="space-y-4">
+        <Label>Requirement Category</Label>
+        <Tabs value={category} onValueChange={setCategory}>
+          <TabsList className="grid grid-cols-3">
+            <TabsTrigger value="students" className="flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              Students
+            </TabsTrigger>
+            <TabsTrigger value="faculty" className="flex items-center gap-2">
+              <User className="h-4 w-4" />
+              Faculty
+            </TabsTrigger>
+            <TabsTrigger value="lab" className="flex items-center gap-2">
+              <Microscope className="h-4 w-4" />
+              Labs
+            </TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="students" className="space-y-6 pt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="studentYear">Year of Students</Label>
+                <Select onValueChange={setStudentYear} value={studentYear} required>
+                  <SelectTrigger id="studentYear">
+                    <SelectValue placeholder="Select Year" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="electronics">Electronics</SelectItem>
-                    <SelectItem value="furniture">Furniture</SelectItem>
-                    <SelectItem value="stationery">Stationery</SelectItem>
-                    <SelectItem value="equipment">Equipment</SelectItem>
+                    {studentYears.map(year => (
+                      <SelectItem key={year.value} value={year.value}>{year.label}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
               
-              <div className="space-y-2 w-40">
-                <label className="text-sm font-medium">Quantity</label>
-                <div className="flex items-center">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="icon"
-                    onClick={() => {
-                      if (item.quantity > 1) {
-                        handleItemChange(index, "quantity", item.quantity - 1);
-                      }
-                    }}
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <input
-                    type="number"
-                    min="1"
-                    value={item.quantity}
-                    onChange={(e) => handleItemChange(index, "quantity", parseInt(e.target.value) || 1)}
-                    className="w-full text-center mx-2 px-3 py-2 border rounded-md"
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="icon"
-                    onClick={() => handleItemChange(index, "quantity", item.quantity + 1)}
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
-                </div>
+              <div className="space-y-2">
+                <Label htmlFor="studentCount">Number of Students</Label>
+                <Input
+                  id="studentCount"
+                  type="number"
+                  placeholder="Enter student count"
+                  value={studentCount}
+                  onChange={(e) => setStudentCount(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="studentInfraReq">Infrastructure Requirements</Label>
+              <Textarea
+                id="studentInfraReq"
+                placeholder="Describe infrastructure requirements (desks, chairs, boards, etc.)"
+                value={studentInfraReq}
+                onChange={(e) => setStudentInfraReq(e.target.value)}
+                rows={3}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="studentElectronicsReq">Electronics Requirements</Label>
+              <Textarea
+                id="studentElectronicsReq"
+                placeholder="Describe electronics requirements (computers, projectors, etc.)"
+                value={studentElectronicsReq}
+                onChange={(e) => setStudentElectronicsReq(e.target.value)}
+                rows={3}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="studentStationaryReq">Stationary Requirements</Label>
+              <Textarea
+                id="studentStationaryReq"
+                placeholder="Describe stationary requirements (notebooks, pens, etc.)"
+                value={studentStationaryReq}
+                onChange={(e) => setStudentStationaryReq(e.target.value)}
+                rows={3}
+              />
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="faculty" className="space-y-6 pt-4">
+            <div className="space-y-2">
+              <Label htmlFor="facultyCount">Number of Faculty</Label>
+              <Input
+                id="facultyCount"
+                type="number"
+                placeholder="Enter faculty count"
+                value={facultyCount}
+                onChange={(e) => setFacultyCount(e.target.value)}
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="facultyInfraReq">Infrastructure Requirements</Label>
+              <Textarea
+                id="facultyInfraReq"
+                placeholder="Describe infrastructure requirements (cabins, chairs, etc.)"
+                value={facultyInfraReq}
+                onChange={(e) => setFacultyInfraReq(e.target.value)}
+                rows={3}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="facultyElectronicsReq">Electronics Requirements</Label>
+              <Textarea
+                id="facultyElectronicsReq"
+                placeholder="Describe electronics requirements (laptops, projectors, etc.)"
+                value={facultyElectronicsReq}
+                onChange={(e) => setFacultyElectronicsReq(e.target.value)}
+                rows={3}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="facultyStationaryReq">Stationary Requirements</Label>
+              <Textarea
+                id="facultyStationaryReq"
+                placeholder="Describe stationary requirements (notebooks, pens, etc.)"
+                value={facultyStationaryReq}
+                onChange={(e) => setFacultyStationaryReq(e.target.value)}
+                rows={3}
+              />
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="lab" className="space-y-6 pt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="labName">Lab Name</Label>
+                <Input
+                  id="labName"
+                  placeholder="Enter lab name"
+                  value={labName}
+                  onChange={(e) => setLabName(e.target.value)}
+                  required
+                />
               </div>
               
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className="text-red-500"
-                onClick={() => handleRemoveItem(index)}
-                disabled={items.length === 1}
-              >
-                <Trash className="h-4 w-4" />
-              </Button>
+              <div className="space-y-2">
+                <Label htmlFor="labCapacity">Students Capacity</Label>
+                <Input
+                  id="labCapacity"
+                  type="number"
+                  placeholder="Enter capacity"
+                  value={labCapacity}
+                  onChange={(e) => setLabCapacity(e.target.value)}
+                  required
+                />
+              </div>
             </div>
-          ))}
-        </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="labInfraReq">Infrastructure Requirements</Label>
+              <Textarea
+                id="labInfraReq"
+                placeholder="Describe infrastructure requirements (tables, chairs, etc.)"
+                value={labInfraReq}
+                onChange={(e) => setLabInfraReq(e.target.value)}
+                rows={2}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="labSystemReq">System Requirements</Label>
+              <Textarea
+                id="labSystemReq"
+                placeholder="Describe system requirements (computers, specifications, etc.)"
+                value={labSystemReq}
+                onChange={(e) => setLabSystemReq(e.target.value)}
+                rows={2}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="labElectronicsReq">Electronics Requirements</Label>
+              <Textarea
+                id="labElectronicsReq"
+                placeholder="Describe electronics requirements (projectors, equipment, etc.)"
+                value={labElectronicsReq}
+                onChange={(e) => setLabElectronicsReq(e.target.value)}
+                rows={2}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="labEquipmentReq">Equipment Requirements</Label>
+              <Textarea
+                id="labEquipmentReq"
+                placeholder="Describe equipment requirements (lab apparatus, tools, etc.)"
+                value={labEquipmentReq}
+                onChange={(e) => setLabEquipmentReq(e.target.value)}
+                rows={2}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="labStationaryReq">Stationary Requirements</Label>
+              <Textarea
+                id="labStationaryReq"
+                placeholder="Describe stationary requirements (manuals, papers, etc.)"
+                value={labStationaryReq}
+                onChange={(e) => setLabStationaryReq(e.target.value)}
+                rows={2}
+              />
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
       
-      <div className="space-y-2">
-        <label htmlFor="notes" className="text-sm font-medium">
-          Additional Notes
-        </label>
-        <textarea
-          id="notes"
-          rows={3}
-          className="w-full px-3 py-2 border rounded-md"
-          placeholder="Enter any additional notes or details..."
-        ></textarea>
-      </div>
-      
-      <div className="flex justify-end space-x-2">
-        <Button variant="outline" onClick={onCancel}>
+      <div className="flex justify-end space-x-4">
+        <Button type="button" variant="outline" onClick={onCancel}>
           Cancel
         </Button>
-        <Button type="submit">Submit Requirement</Button>
+        <Button type="submit">
+          Submit Requirement
+        </Button>
       </div>
     </form>
   );
