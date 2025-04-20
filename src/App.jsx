@@ -19,6 +19,12 @@ import RequestApproval from "./pages/RequestApproval";
 import AddStockForm from "./components/stock/AddStockForm";
 import ServiceStockForm from "./components/stock/ServiceStockForm";
 import CreatePurchaseRequest from "./components/purchase/CreatePurchaseRequest";
+import CreateUserForm from "./components/users/CreateUserForm";
+import EditStockForm from "./components/stock/EditStockForm";
+import AllocateStockForm from "./components/stock/AllocateStockForm";
+import RequestList from "./components/requests/RequestList";
+import RequestHistory from "./components/requests/RequestHistory";
+import ApprovalHistory from "./components/requests/ApprovalHistory";
 
 const queryClient = new QueryClient();
 
