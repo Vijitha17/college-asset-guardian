@@ -29,6 +29,76 @@ const Sidebar = ({ isOpen }) => {
     }
   };
   
+  const renderMenuItem = (item) => {
+    // If item has a submenu, render it as a main menu item
+    if (item.submenu) {
+      return (
+        <div key={item.title} className="py-1">
+          <div
+            className={cn(
+              "group flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+              "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+            )}
+          >
+            {item.icon && (
+              <item.icon className={cn(
+                "mr-3 h-5 w-5 flex-shrink-0",
+                isOpen ? "" : "mx-auto"
+              )} />
+            )}
+            {isOpen && (
+              <span className="flex-1 truncate">{item.title}</span>
+            )}
+          </div>
+          
+          {isOpen && item.submenu && (
+            <div className="ml-6 mt-1 space-y-1">
+              {item.submenu.map((subItem) => (
+                <button
+                  key={subItem.title}
+                  onClick={() => navigate(subItem.path)}
+                  className={cn(
+                    "group flex w-full items-center rounded-md px-3 py-2 text-xs font-medium transition-colors",
+                    isActive(subItem.path)
+                      ? "bg-sidebar-primary text-sidebar-primary-foreground"
+                      : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                  )}
+                >
+                  <span className="flex-1 truncate">{subItem.title}</span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    } else {
+      // Regular menu item with direct navigation
+      return (
+        <div key={item.title} className="py-1">
+          <button
+            onClick={() => handleMenuClick(item)}
+            className={cn(
+              "group flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+              isActive(item.path)
+                ? "bg-sidebar-primary text-sidebar-primary-foreground"
+                : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+            )}
+          >
+            {item.icon && (
+              <item.icon className={cn(
+                "mr-3 h-5 w-5 flex-shrink-0",
+                isOpen ? "" : "mx-auto"
+              )} />
+            )}
+            {isOpen && (
+              <span className="flex-1 truncate">{item.title}</span>
+            )}
+          </button>
+        </div>
+      );
+    }
+  };
+  
   return (
     <aside
       className={cn(
@@ -47,29 +117,7 @@ const Sidebar = ({ isOpen }) => {
       
       <div className="flex-1 overflow-y-auto py-4">
         <nav className="px-2 space-y-1">
-          {menuItems.map((item) => (
-            <div key={item.title} className="py-1">
-              <button
-                onClick={() => handleMenuClick(item)}
-                className={cn(
-                  "group flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                  isActive(item.path)
-                    ? "bg-sidebar-primary text-sidebar-primary-foreground"
-                    : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                )}
-              >
-                {item.icon && (
-                  <item.icon className={cn(
-                    "mr-3 h-5 w-5 flex-shrink-0",
-                    isOpen ? "" : "mx-auto"
-                  )} />
-                )}
-                {isOpen && (
-                  <span className="flex-1 truncate">{item.title}</span>
-                )}
-              </button>
-            </div>
-          ))}
+          {menuItems.map(renderMenuItem)}
         </nav>
       </div>
     </aside>
