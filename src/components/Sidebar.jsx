@@ -26,36 +26,7 @@ const Sidebar = ({ isOpen }) => {
   const handleMenuClick = (item) => {
     if (item.path) {
       navigate(item.path);
-      return;
     }
-    
-    // Handle submenu items
-    if (item.submenu && item.submenu.length > 0) {
-      navigate(item.submenu[0].path);
-    }
-  };
-  
-  const renderSubmenu = (item) => {
-    if (!item.submenu || !isOpen) return null;
-    
-    return (
-      <div className="pl-8 mt-1 space-y-1">
-        {item.submenu.map((subItem) => (
-          <Link
-            key={subItem.title}
-            to={subItem.path}
-            className={cn(
-              "block py-1 px-2 text-sm rounded-md transition-colors",
-              isActive(subItem.path)
-                ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                : "text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground"
-            )}
-          >
-            {subItem.title}
-          </Link>
-        ))}
-      </div>
-    );
   };
   
   return (
@@ -97,8 +68,6 @@ const Sidebar = ({ isOpen }) => {
                   <span className="flex-1 truncate">{item.title}</span>
                 )}
               </button>
-              
-              {isOpen && renderSubmenu(item)}
             </div>
           ))}
         </nav>

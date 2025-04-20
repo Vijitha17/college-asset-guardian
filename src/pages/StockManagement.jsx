@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
@@ -27,14 +28,10 @@ const StockManagement = () => {
   };
   
   const handleAddStock = () => {
-    // Navigate to add stock form
-    console.log("Navigating to /stock/add");
     navigate("/stock/add");
   };
 
   const handleSendToService = () => {
-    // Navigate to service stock form
-    console.log("Navigating to /stock/service");
     navigate("/stock/service");
   };
   
@@ -132,10 +129,6 @@ const StockManagement = () => {
                 <Share2 className="h-4 w-4 mr-2" />
                 Allocated Stock
               </TabsTrigger>
-              <TabsTrigger value="toService" className="flex items-center">
-                <Settings className="h-4 w-4 mr-2" />
-                Send to Service
-              </TabsTrigger>
               <TabsTrigger value="inService" className="flex items-center">
                 <Wrench className="h-4 w-4 mr-2" />
                 Stock in Service
@@ -148,15 +141,6 @@ const StockManagement = () => {
             
             <TabsContent value="allocated" className="space-y-4">
               <AllocatedStockList />
-            </TabsContent>
-            
-            <TabsContent value="toService" className="space-y-4">
-              <div className="text-center py-8">
-                <Button onClick={handleSendToService} size="lg">
-                  <Wrench className="h-5 w-5 mr-2" />
-                  Go to Send to Service Form
-                </Button>
-              </div>
             </TabsContent>
             
             <TabsContent value="inService" className="space-y-4">

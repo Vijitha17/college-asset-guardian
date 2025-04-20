@@ -1,5 +1,6 @@
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { 
   Table, 
   TableHeader, 
@@ -26,6 +27,8 @@ import {
 } from "lucide-react";
 
 const VendorList = ({ type }) => {
+  const navigate = useNavigate();
+  
   // Sample data - in a real app, this would come from an API
   const vendors = [
     { 
@@ -34,7 +37,8 @@ const VendorList = ({ type }) => {
       type: "service",
       contact: "John Smith",
       email: "john@techserv.com",
-      address: "123 Tech Street, City",
+      phone: "123-456-7890",
+      address: "123 Tech Street, City, State, ZIP",
       products: ["Computer Repair", "Network Setup", "IT Support"]
     },
     { 
@@ -43,7 +47,8 @@ const VendorList = ({ type }) => {
       type: "product",
       contact: "Sarah Johnson",
       email: "sarah@officesupplies.com",
-      address: "456 Supply Road, Town",
+      phone: "987-654-3210",
+      address: "456 Supply Road, Town, State, ZIP",
       products: ["Paper", "Printers", "Stationery"]
     }
   ].filter(vendor => vendor.type === type);
@@ -57,6 +62,8 @@ const VendorList = ({ type }) => {
             <TableHead>Name</TableHead>
             <TableHead>Contact Person</TableHead>
             <TableHead>Email</TableHead>
+            <TableHead>Phone</TableHead>
+            <TableHead>Address</TableHead>
             <TableHead>Products/Services</TableHead>
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
@@ -68,6 +75,8 @@ const VendorList = ({ type }) => {
               <TableCell>{vendor.name}</TableCell>
               <TableCell>{vendor.contact}</TableCell>
               <TableCell>{vendor.email}</TableCell>
+              <TableCell>{vendor.phone}</TableCell>
+              <TableCell className="truncate max-w-[200px]">{vendor.address}</TableCell>
               <TableCell>
                 <div className="flex flex-wrap gap-1">
                   {vendor.products.slice(0, 2).map((product) => (
@@ -89,11 +98,11 @@ const VendorList = ({ type }) => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate(`/vendor/view/${vendor.id}`)}>
                       <Eye className="mr-2 h-4 w-4" />
                       <span>View Details</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate(`/vendor/edit/${vendor.id}`)}>
                       <Edit className="mr-2 h-4 w-4" />
                       <span>Edit Vendor</span>
                     </DropdownMenuItem>
