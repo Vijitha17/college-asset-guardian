@@ -7,9 +7,8 @@ import { cn } from "@/lib/utils";
 const Sidebar = ({ isOpen }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [role, setRole] = useState("management_admin"); // Default role
+  const [role, setRole] = useState("management_admin");
   
-  // Get user role from localStorage
   useEffect(() => {
     const userRole = localStorage.getItem("userRole");
     if (userRole) {
@@ -51,26 +50,6 @@ const Sidebar = ({ isOpen }) => {
             <span className="flex-1 truncate">{item.title}</span>
           )}
         </button>
-        
-        {/* Display submenu if it exists and sidebar is open */}
-        {isOpen && item.submenu && (
-          <div className="ml-6 mt-1 space-y-1">
-            {item.submenu.map((subItem) => (
-              <button
-                key={subItem.title}
-                onClick={() => navigate(subItem.path)}
-                className={cn(
-                  "group flex w-full items-center rounded-md px-3 py-2 text-xs font-medium transition-colors",
-                  isActive(subItem.path)
-                    ? "bg-sidebar-primary text-sidebar-primary-foreground"
-                    : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                )}
-              >
-                <span className="flex-1 truncate">{subItem.title}</span>
-              </button>
-            ))}
-          </div>
-        )}
       </div>
     );
   };

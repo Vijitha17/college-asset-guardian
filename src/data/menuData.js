@@ -1,4 +1,3 @@
-
 import {
   LayoutDashboard,
   PackageOpen,
@@ -8,17 +7,10 @@ import {
   FileText,
   Users,
   DollarSign,
-  CheckCircle,
   History,
-  Settings,
-  Wrench,
-  TrendingUp,
-  TrendingDown,
-  Inbox,
-  Mail,
-  List,
   ArrowDown,
-  ArrowUp
+  ArrowUp,
+  List
 } from "lucide-react";
 
 export const menuByRole = {
@@ -128,7 +120,7 @@ export const menuByRole = {
       icon: FileText
     }
   ],
-  
+
   management_admin: [
     {
       title: "Dashboard",
@@ -137,164 +129,38 @@ export const menuByRole = {
     },
     {
       title: "Requirement",
-      path: "/requirement/create",
-      icon: PackageOpen,
-      submenu: [
-        {
-          title: "Create Requirement",
-          path: "/requirement/create"
-        },
-        {
-          title: "Current Requirement",
-          path: "/requirement/current"
-        },
-        {
-          title: "Requirement History",
-          path: "/requirement/history"
-        }
-      ]
+      path: "/requirement/current",
+      icon: PackageOpen
     },
     {
       title: "Stock Management",
       path: "/stock",
-      icon: Box,
-      submenu: [
-        {
-          title: "Add Stock",
-          path: "/stock/add"
-        },
-        {
-          title: "Current Stock",
-          path: "/stock"
-        },
-        {
-          title: "Allocated Stock",
-          path: "/stock/allocated"
-        },
-        {
-          title: "Send to Service",
-          path: "/stock/service"
-        },
-        {
-          title: "Stock in Service",
-          path: "/stock/in-service"
-        }
-      ]
+      icon: Box
     },
     {
       title: "Vendor Management",
-      path: "/vendor/add",
-      icon: Truck,
-      submenu: [
-        {
-          title: "Add Vendor",
-          path: "/vendor/add"
-        },
-        {
-          title: "Service Vendor",
-          path: "/vendor/service"
-        },
-        {
-          title: "Product Vendor",
-          path: "/vendor/product"
-        }
-      ]
+      path: "/vendor/service",
+      icon: Truck
     },
     {
       title: "Purchase",
       path: "/purchase/create-request",
-      icon: ShoppingCart,
-      submenu: [
-        {
-          title: "Create Purchase Request",
-          path: "/purchase/create-request"
-        },
-        {
-          title: "Purchase Request List",
-          path: "/purchase/request-list"
-        },
-        {
-          title: "Create Purchase",
-          path: "/purchase/create"
-        },
-        {
-          title: "Purchase Status",
-          path: "/purchase/status"
-        },
-        {
-          title: "Purchased List",
-          path: "/purchase/list"
-        },
-        {
-          title: "Manage Purchase",
-          path: "/purchase/manage"
-        }
-      ]
+      icon: ShoppingCart
     },
     {
       title: "User Management",
-      path: "/users/create",
-      icon: Users,
-      submenu: [
-        {
-          title: "Create User",
-          path: "/users/create"
-        },
-        {
-          title: "User List",
-          path: "/users/list"
-        },
-        {
-          title: "Manage Users",
-          path: "/users/manage"
-        },
-        {
-          title: "College",
-          path: "/users/college"
-        },
-        {
-          title: "Departments",
-          path: "/users/departments"
-        }
-      ]
+      path: "/users/list",
+      icon: Users
     },
     {
       title: "Expenditure",
       path: "/expenditure/add",
-      icon: DollarSign,
-      submenu: [
-        {
-          title: "Add Expenditure",
-          path: "/expenditure/add"
-        },
-        {
-          title: "Purchase Expenditure",
-          path: "/expenditure/purchase"
-        },
-        {
-          title: "Service Expenditure",
-          path: "/expenditure/service"
-        }
-      ]
+      icon: DollarSign
     },
     {
       title: "Request & Approval",
       path: "/request/history",
-      icon: History,
-      submenu: [
-        {
-          title: "Request History",
-          path: "/request/history"
-        },
-        {
-          title: "Approve Request",
-          path: "/request/approval"
-        },
-        {
-          title: "Approval History",
-          path: "/request/approval-history"
-        }
-      ]
+      icon: History
     },
     {
       title: "Reports",
@@ -312,32 +178,12 @@ export const menuByRole = {
     {
       title: "Requirement",
       path: "/requirement/create",
-      icon: PackageOpen,
-      submenu: [
-        {
-          title: "Create Requirement",
-          path: "/requirement/create"
-        },
-        {
-          title: "Current Requirement",
-          path: "/requirement/current"
-        },
-        {
-          title: "Requirement History",
-          path: "/requirement/history"
-        }
-      ]
+      icon: PackageOpen
     },
     {
       title: "Stock Management",
       path: "/stock/allocated",
-      icon: Box,
-      submenu: [
-        {
-          title: "Allocated Stock",
-          path: "/stock/allocated"
-        }
-      ]
+      icon: Box
     },
     {
       title: "Stock Movement",
@@ -373,36 +219,12 @@ export const menuByRole = {
     {
       title: "User Management",
       path: "/users/list",
-      icon: Users,
-      submenu: [
-        {
-          title: "User List",
-          path: "/users/list"
-        }
-      ]
+      icon: Users
     },
     {
       title: "Request & Approval",
       path: "/request/create",
-      icon: History,
-      submenu: [
-        {
-          title: "Create Request",
-          path: "/request/create"
-        },
-        {
-          title: "Request History",
-          path: "/request/history"
-        },
-        {
-          title: "Approve Request",
-          path: "/request/approval"
-        },
-        {
-          title: "Approval History",
-          path: "/request/approval-history"
-        }
-      ]
+      icon: History
     },
     {
       title: "Reports",
@@ -420,32 +242,12 @@ export const menuByRole = {
     {
       title: "Requirement",
       path: "/requirement/create",
-      icon: PackageOpen,
-      submenu: [
-        {
-          title: "Create Requirement",
-          path: "/requirement/create"
-        },
-        {
-          title: "Current Requirement",
-          path: "/requirement/current"
-        },
-        {
-          title: "Requirement History",
-          path: "/requirement/history"
-        }
-      ]
+      icon: PackageOpen
     },
     {
       title: "Stock Management",
       path: "/stock/allocated",
-      icon: Box,
-      submenu: [
-        {
-          title: "Allocated Stock",
-          path: "/stock/allocated"
-        }
-      ]
+      icon: Box
     },
     {
       title: "Stock Movement",
@@ -481,36 +283,12 @@ export const menuByRole = {
     {
       title: "User Management",
       path: "/users/list",
-      icon: Users,
-      submenu: [
-        {
-          title: "User List",
-          path: "/users/list"
-        }
-      ]
+      icon: Users
     },
     {
       title: "Request & Approval",
       path: "/request/create",
-      icon: History,
-      submenu: [
-        {
-          title: "Create Request",
-          path: "/request/create"
-        },
-        {
-          title: "Request History",
-          path: "/request/history"
-        },
-        {
-          title: "Approve Request",
-          path: "/request/approval"
-        },
-        {
-          title: "Approval History",
-          path: "/request/approval-history"
-        }
-      ]
+      icon: History
     },
     {
       title: "Reports",
@@ -528,32 +306,12 @@ export const menuByRole = {
     {
       title: "Requirement",
       path: "/requirement/create",
-      icon: PackageOpen,
-      submenu: [
-        {
-          title: "Create Requirement",
-          path: "/requirement/create"
-        },
-        {
-          title: "Current Requirement",
-          path: "/requirement/current"
-        },
-        {
-          title: "Requirement History",
-          path: "/requirement/history"
-        }
-      ]
+      icon: PackageOpen
     },
     {
       title: "Stock Management",
       path: "/stock/allocated",
-      icon: Box,
-      submenu: [
-        {
-          title: "Allocated Stock",
-          path: "/stock/allocated"
-        }
-      ]
+      icon: Box
     },
     {
       title: "Stock Movement",
@@ -589,32 +347,12 @@ export const menuByRole = {
     {
       title: "User Management",
       path: "/users/list",
-      icon: Users,
-      submenu: [
-        {
-          title: "User List",
-          path: "/users/list"
-        }
-      ]
+      icon: Users
     },
     {
       title: "Request",
       path: "/request/create",
-      icon: History,
-      submenu: [
-        {
-          title: "Create Request",
-          path: "/request/create"
-        },
-        {
-          title: "Request List",
-          path: "/request/list"
-        },
-        {
-          title: "Approval History",
-          path: "/request/approval-history"
-        }
-      ]
+      icon: History
     },
     {
       title: "Reports",
