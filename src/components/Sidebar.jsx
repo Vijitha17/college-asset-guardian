@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { menuByRole } from "@/data/menuData";
 import { cn } from "@/lib/utils";
 
@@ -18,42 +18,14 @@ const Sidebar = ({ isOpen }) => {
   
   const menuItems = menuByRole[role] || [];
   
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
-  
+  const isActive = (path) => location.pathname.startsWith(path);
+
   const handleMenuClick = (item) => {
     if (item.path) {
       navigate(item.path);
     }
   };
-  
-  const renderMenuItem = (item) => {
-    return (
-      <div key={item.title} className="py-1">
-        <button
-          onClick={() => handleMenuClick(item)}
-          className={cn(
-            "group flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
-            isActive(item.path)
-              ? "bg-sidebar-primary text-sidebar-primary-foreground"
-              : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-          )}
-        >
-          {item.icon && (
-            <item.icon className={cn(
-              "mr-3 h-5 w-5 flex-shrink-0",
-              isOpen ? "" : "mx-auto"
-            )} />
-          )}
-          {isOpen && (
-            <span className="flex-1 truncate">{item.title}</span>
-          )}
-        </button>
-      </div>
-    );
-  };
-  
+
   return (
     <aside
       className={cn(
@@ -72,7 +44,29 @@ const Sidebar = ({ isOpen }) => {
       
       <div className="flex-1 overflow-y-auto py-4">
         <nav className="px-2 space-y-1">
-          {menuItems.map(renderMenuItem)}
+          {menuItems.map((item) => (
+            <div key={item.title} className="py-1">
+              <button
+                onClick={() => handleMenuClick(item)}
+                className={cn(
+                  "group flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  isActive(item.path)
+                    ? "bg-sidebar-primary text-sidebar-primary-foreground"
+                    : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                )}
+              >
+                {item.icon && (
+                  <item.icon className={cn(
+                    "mr-3 h-5 w-5 flex-shrink-0",
+                    isOpen ? "" : "mx-auto"
+                  )} />
+                )}
+                {isOpen && (
+                  <span className="flex-1 truncate">{item.title}</span>
+                )}
+              </button>
+            </div>
+          ))}
         </nav>
       </div>
     </aside>
