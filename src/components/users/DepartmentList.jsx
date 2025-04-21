@@ -24,8 +24,11 @@ import {
   Eye,
   BookOpen
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const DepartmentList = () => {
+  const navigate = useNavigate();
+
   // Sample data
   const departments = [
     { id: 1, name: "Computer Science", college: "Engineering College", hod: "Prof. Sarah Johnson" },
@@ -39,7 +42,7 @@ const DepartmentList = () => {
   return (
     <div className="space-y-4">
       <div className="flex justify-end">
-        <Button>
+        <Button onClick={() => navigate("/users/add-department")}>
           <Plus className="h-4 w-4 mr-2" />
           Add Department
         </Button>
@@ -101,3 +104,4 @@ const DepartmentList = () => {
 };
 
 export default DepartmentList;
+

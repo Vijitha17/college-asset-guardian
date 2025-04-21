@@ -24,8 +24,11 @@ import {
   Eye,
   Building
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const CollegeList = () => {
+  const navigate = useNavigate();
+
   // Sample data
   const colleges = [
     { id: 1, name: "Engineering College", address: "123 College Road, Campus Area", principal: "Dr. John Smith" },
@@ -37,7 +40,7 @@ const CollegeList = () => {
   return (
     <div className="space-y-4">
       <div className="flex justify-end">
-        <Button>
+        <Button onClick={() => navigate("/users/add-college")}>
           <Plus className="h-4 w-4 mr-2" />
           Add College
         </Button>
@@ -99,3 +102,4 @@ const CollegeList = () => {
 };
 
 export default CollegeList;
+
