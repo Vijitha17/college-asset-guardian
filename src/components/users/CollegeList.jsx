@@ -38,6 +38,7 @@ const CollegeList = () => {
   ];
   
   const handleAddCollege = () => {
+    console.log("Navigating to /users/add-college");
     navigate("/users/add-college");
   };
   

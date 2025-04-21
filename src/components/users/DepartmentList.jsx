@@ -40,6 +40,7 @@ const DepartmentList = () => {
   ];
   
   const handleAddDepartment = () => {
+    console.log("Navigating to /users/add-department");
     navigate("/users/add-department");
   };
   
