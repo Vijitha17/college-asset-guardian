@@ -12,6 +12,7 @@ import Reports from "./pages/Reports";
 import UserManagement from "./pages/UserManagement";
 import Requirements from "./pages/Requirements";
 import StockManagement from "./pages/StockManagement";
+import StockMovement from "./pages/StockMovement";
 import VendorManagement from "./pages/VendorManagement";
 import PurchaseManagement from "./pages/PurchaseManagement";
 import ExpenditureManagement from "./pages/ExpenditureManagement";
@@ -29,12 +30,12 @@ import StockView from "./pages/StockView";
 import VendorView from "./pages/VendorView";
 import AddCollegeForm from "./pages/AddCollegeForm";
 import AddDepartmentForm from "./pages/AddDepartmentForm";
-import RequestInventory from "./pages/stock/movement/RequestInventory";
-import RequestStatus from "./pages/stock/movement/RequestStatus";
-import IncomingRequests from "./pages/stock/movement/IncomingRequests";
-import HandoverManagement from "./pages/stock/movement/HandoverManagement";
-import ReturnsManagement from "./pages/stock/movement/ReturnsManagement";
-import MovementHistory from "./pages/stock/movement/MovementHistory";
+import RequestInventory from "./components/movement/RequestInventory";
+import RequestStatus from "./components/movement/RequestStatus";
+import IncomingRequests from "./components/movement/IncomingRequests";
+import HandoverManagement from "./components/movement/HandoverManagement";
+import ReturnsManagement from "./components/movement/ReturnsManagement";
+import MovementHistory from "./components/movement/MovementHistory";
 
 const queryClient = new QueryClient();
 
@@ -49,12 +50,13 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/reports" element={<Reports />} />
+          
+          {/* User management routes */}
           <Route path="/users" element={<UserManagement />} />
           <Route path="/users/create" element={<CreateUserForm />} />
-          <Route path="/users/college" element={<UserManagement />} />
           <Route path="/users/add-college" element={<AddCollegeForm />} />
-          <Route path="/users/departments" element={<UserManagement />} />
           <Route path="/users/add-department" element={<AddDepartmentForm />} />
+          
           <Route path="/requirement/*" element={<Requirements />} />
           <Route path="/stock" element={<StockManagement />} />
           <Route path="/stock/add" element={<AddStockForm />} />
@@ -63,12 +65,16 @@ const App = () => (
           <Route path="/stock/allocate/:id" element={<AllocateStockForm />} />
           <Route path="/stock/service" element={<ServiceStockForm />} />
           <Route path="/stock/service/:id" element={<ServiceStockForm />} />
-          <Route path="/stock/movement/request-inventory" element={<RequestInventory />} />
-          <Route path="/stock/movement/request-status" element={<RequestStatus />} />
-          <Route path="/stock/movement/incoming-requests" element={<IncomingRequests />} />
-          <Route path="/stock/movement/handover" element={<HandoverManagement />} />
-          <Route path="/stock/movement/returns" element={<ReturnsManagement />} />
-          <Route path="/stock/movement/history" element={<MovementHistory />} />
+          
+          {/* Stock movement routes */}
+          <Route path="/movement" element={<StockMovement />} />
+          <Route path="/movement/request-inventory" element={<RequestInventory />} />
+          <Route path="/movement/request-status" element={<RequestStatus />} />
+          <Route path="/movement/incoming-requests" element={<IncomingRequests />} />
+          <Route path="/movement/handover" element={<HandoverManagement />} />
+          <Route path="/movement/returns" element={<ReturnsManagement />} />
+          <Route path="/movement/history" element={<MovementHistory />} />
+          
           <Route path="/vendor/*" element={<VendorManagement />} />
           <Route path="/vendor/view/:id" element={<VendorView />} />
           <Route path="/purchase/*" element={<PurchaseManagement />} />
@@ -78,6 +84,7 @@ const App = () => (
           <Route path="/request/approval" element={<RequestApproval />} />
           <Route path="/request/history" element={<RequestHistory />} />
           <Route path="/request/approval-history" element={<ApprovalHistory />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -39,10 +39,14 @@ const DepartmentList = () => {
     { id: 6, name: "English Literature", college: "Arts College", hod: "Prof. Elizabeth Davis" }
   ];
   
+  const handleAddDepartment = () => {
+    navigate("/users/add-department");
+  };
+  
   return (
     <div className="space-y-4">
       <div className="flex justify-end">
-        <Button onClick={() => navigate("/users/add-department")}>
+        <Button onClick={handleAddDepartment}>
           <Plus className="h-4 w-4 mr-2" />
           Add Department
         </Button>
@@ -104,4 +108,3 @@ const DepartmentList = () => {
 };
 
 export default DepartmentList;
-

@@ -37,10 +37,14 @@ const CollegeList = () => {
     { id: 4, name: "Commerce College", address: "321 Business Blvd, Campus Area", principal: "Dr. James Anderson" }
   ];
   
+  const handleAddCollege = () => {
+    navigate("/users/add-college");
+  };
+  
   return (
     <div className="space-y-4">
       <div className="flex justify-end">
-        <Button onClick={() => navigate("/users/add-college")}>
+        <Button onClick={handleAddCollege}>
           <Plus className="h-4 w-4 mr-2" />
           Add College
         </Button>
@@ -102,4 +106,3 @@ const CollegeList = () => {
 };
 
 export default CollegeList;
-
