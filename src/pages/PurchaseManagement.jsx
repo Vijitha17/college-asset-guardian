@@ -3,48 +3,28 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { 
-  ShoppingCart, 
-  FileText, 
-  CheckCircle, 
-  History,
-  Search,
-  Plus
-} from "lucide-react";
-import PurchaseRequestList from "@/components/purchase/PurchaseRequestList";
-import PurchaseList from "@/components/purchase/PurchaseList";
-import PurchaseForm from "@/components/purchase/PurchaseForm";
+import { Plus, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import PurchaseList from "@/components/purchase/PurchaseList";
 
 const PurchaseManagement = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isCreating, setIsCreating] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
-  
+
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
   const handleCreatePurchase = () => {
-    setIsCreating(true);
+    navigate('/purchase');
   };
 
   const handleCreateRequest = () => {
     navigate('/purchase/create-request');
   };
 
-  const handleSavePurchase = () => {
-    // In a real app, you would save the purchase details to a database
-    toast({
-      title: "Purchase created successfully",
-      description: "The purchase has been saved to the system."
-    });
-    setIsCreating(false);
-  };
-  
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
@@ -57,85 +37,18 @@ const PurchaseManagement = () => {
             <h1 className="text-2xl font-bold mb-4 md:mb-0">Purchase Management</h1>
             
             <div className="flex flex-col md:flex-row w-full md:w-auto space-y-2 md:space-y-0 md:space-x-2">
-              <div className="relative w-full md:w-64">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <input 
-                  type="text" 
-                  placeholder="Search purchases..." 
-                  className="pl-8 pr-4 py-2 w-full rounded-md border border-input bg-background"
-                />
-              </div>
-              
-              {!isCreating && (
-                <>
-                  <Button onClick={handleCreatePurchase}>
-                    <ShoppingCart className="h-4 w-4 mr-2" />
-                    Create Purchase
-                  </Button>
-                  
-                  <Button onClick={handleCreateRequest} variant="outline">
-                    <FileText className="h-4 w-4 mr-2" />
-                    Create Request
-                  </Button>
-                </>
-              )}
-              
-              {isCreating && (
-                <>
-                  <Button onClick={handleSavePurchase}>
-                    Save Purchase
-                  </Button>
-                  <Button variant="outline" onClick={() => setIsCreating(false)}>
-                    Cancel
-                  </Button>
-                </>
-              )}
+              <Button onClick={handleCreatePurchase}>
+                <Plus className="h-4 w-4 mr-2" />
+                Create Purchase
+              </Button>
+              <Button onClick={handleCreateRequest}>
+                <FileText className="h-4 w-4 mr-2" />
+                Create Purchase Request
+              </Button>
             </div>
           </div>
           
-          {isCreating ? (
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold mb-4">Create New Purchase</h2>
-              <PurchaseForm onCancel={() => setIsCreating(false)} />
-            </div>
-          ) : (
-            <Tabs defaultValue="requests" className="space-y-4">
-              <TabsList>
-                <TabsTrigger value="requests" className="flex items-center">
-                  <FileText className="h-4 w-4 mr-2" />
-                  Purchase Requests
-                </TabsTrigger>
-                <TabsTrigger value="purchases" className="flex items-center">
-                  <ShoppingCart className="h-4 w-4 mr-2" />
-                  Purchases
-                </TabsTrigger>
-                <TabsTrigger value="approved" className="flex items-center">
-                  <CheckCircle className="h-4 w-4 mr-2" />
-                  Approved
-                </TabsTrigger>
-                <TabsTrigger value="history" className="flex items-center">
-                  <History className="h-4 w-4 mr-2" />
-                  History
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="requests" className="space-y-4">
-                <PurchaseRequestList />
-              </TabsContent>
-              
-              <TabsContent value="purchases" className="space-y-4">
-                <PurchaseList />
-              </TabsContent>
-              
-              <TabsContent value="approved" className="space-y-4">
-                <PurchaseList status="approved" />
-              </TabsContent>
-              
-              <TabsContent value="history" className="space-y-4">
-                <PurchaseList status="completed" />
-              </TabsContent>
-            </Tabs>
-          )}
+          <PurchaseList />
         </main>
       </div>
     </div>

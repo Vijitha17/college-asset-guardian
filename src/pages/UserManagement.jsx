@@ -7,21 +7,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { 
   Search, 
-  Plus, 
-  Filter, 
-  User, 
+  UserPlus, 
   Building, 
-  BookOpen,
-  UserPlus
+  BookOpen
 } from "lucide-react";
 import UserList from "@/components/users/UserList";
-import UserForm from "@/components/users/UserForm";
 import CollegeList from "@/components/users/CollegeList";
 import DepartmentList from "@/components/users/DepartmentList";
 
 const UserManagement = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isCreating, setIsCreating] = useState(false);
   const navigate = useNavigate();
   
   const toggleSidebar = () => {
@@ -71,7 +66,7 @@ const UserManagement = () => {
           <Tabs defaultValue="users" className="space-y-4">
             <TabsList>
               <TabsTrigger value="users" className="flex items-center">
-                <User className="h-4 w-4 mr-2" />
+                <UserPlus className="h-4 w-4 mr-2" />
                 Users
               </TabsTrigger>
               <TabsTrigger value="colleges" className="flex items-center">
@@ -91,7 +86,7 @@ const UserManagement = () => {
             <TabsContent value="colleges" className="space-y-4">
               <div className="flex justify-end mb-4">
                 <Button onClick={handleAddCollege}>
-                  <Plus className="h-4 w-4 mr-2" />
+                  <Building className="h-4 w-4 mr-2" />
                   Add College
                 </Button>
               </div>
@@ -101,7 +96,7 @@ const UserManagement = () => {
             <TabsContent value="departments" className="space-y-4">
               <div className="flex justify-end mb-4">
                 <Button onClick={handleAddDepartment}>
-                  <Plus className="h-4 w-4 mr-2" />
+                  <BookOpen className="h-4 w-4 mr-2" />
                   Add Department
                 </Button>
               </div>

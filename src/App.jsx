@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -35,6 +34,7 @@ import ServiceStockForm from "./components/stock/ServiceStockForm";
 import CreatePurchaseRequest from "./components/purchase/CreatePurchaseRequest";
 import AddCollegeForm from "./components/users/AddCollegeForm";
 import AddDepartmentForm from "./components/users/AddDepartmentForm";
+import StockMovement from "./pages/StockMovement";
 
 const queryClient = new QueryClient();
 
