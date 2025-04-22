@@ -9,7 +9,6 @@ import {
   Plus, 
   Filter, 
   User, 
-  UserPlus, 
   Building, 
   BookOpen 
 } from "lucide-react";
@@ -49,7 +48,7 @@ const UserManagement = () => {
               
               {!isCreating && (
                 <Button onClick={() => setIsCreating(true)}>
-                  <UserPlus className="h-4 w-4 mr-2" />
+                  <Plus className="h-4 w-4 mr-2" />
                   Add User
                 </Button>
               )}

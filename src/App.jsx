@@ -12,17 +12,11 @@ import Reports from "./pages/Reports";
 import UserManagement from "./pages/UserManagement";
 import Requirements from "./pages/Requirements";
 import StockManagement from "./pages/StockManagement";
-import StockMovement from "./pages/StockMovement";
 import VendorManagement from "./pages/VendorManagement";
 import PurchaseManagement from "./pages/PurchaseManagement";
 import ExpenditureManagement from "./pages/ExpenditureManagement";
 import RequestApproval from "./pages/RequestApproval";
-import AddStockForm from "./components/stock/AddStockForm";
-import ServiceStockForm from "./components/stock/ServiceStockForm";
-import CreatePurchaseRequest from "./components/purchase/CreatePurchaseRequest";
 import CreateUserForm from "./components/users/CreateUserForm";
-import AddCollegeForm from "./components/users/AddCollegeForm";
-import AddDepartmentForm from "./components/users/AddDepartmentForm";
 import EditStockForm from "./components/stock/EditStockForm";
 import AllocateStockForm from "./components/stock/AllocateStockForm";
 import RequestList from "./components/requests/RequestList";
@@ -54,17 +48,12 @@ const App = () => (
           {/* User management routes */}
           <Route path="/users" element={<UserManagement />} />
           <Route path="/users/create" element={<CreateUserForm />} />
-          <Route path="/users/add-college" element={<AddCollegeForm />} />
-          <Route path="/users/add-department" element={<AddDepartmentForm />} />
           
           <Route path="/requirement/*" element={<Requirements />} />
           <Route path="/stock" element={<StockManagement />} />
-          <Route path="/stock/add" element={<AddStockForm />} />
           <Route path="/stock/view/:id" element={<StockView />} />
           <Route path="/stock/edit/:id" element={<EditStockForm />} />
           <Route path="/stock/allocate/:id" element={<AllocateStockForm />} />
-          <Route path="/stock/service" element={<ServiceStockForm />} />
-          <Route path="/stock/service/:id" element={<ServiceStockForm />} />
           
           {/* Stock movement routes */}
           <Route path="/movement" element={<StockMovement />} />
@@ -78,7 +67,6 @@ const App = () => (
           <Route path="/vendor/*" element={<VendorManagement />} />
           <Route path="/vendor/view/:id" element={<VendorView />} />
           <Route path="/purchase/*" element={<PurchaseManagement />} />
-          <Route path="/purchase/create-request" element={<CreatePurchaseRequest />} />
           <Route path="/expenditure/*" element={<ExpenditureManagement />} />
           <Route path="/request/list" element={<RequestList />} />
           <Route path="/request/approval" element={<RequestApproval />} />

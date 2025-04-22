@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
@@ -6,7 +5,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { 
   Search, 
-  Plus, 
   Filter, 
   Package, 
   Share2, 
@@ -16,23 +14,13 @@ import {
 import StockList from "@/components/stock/StockList";
 import AllocatedStockList from "@/components/stock/AllocatedStockList";
 import ServiceStockList from "@/components/stock/ServiceStockList";
-import { useNavigate } from "react-router-dom";
 
 const StockManagement = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
-  const navigate = useNavigate();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
-  };
-  
-  const handleAddStock = () => {
-    navigate("/stock/add");
-  };
-
-  const handleSendToService = () => {
-    navigate("/stock/service");
   };
   
   return (
@@ -62,16 +50,6 @@ const StockManagement = () => {
                 onClick={() => setFilterOpen(!filterOpen)}
               >
                 <Filter className="h-4 w-4" />
-              </Button>
-              
-              <Button onClick={handleAddStock}>
-                <Plus className="h-4 w-4 mr-2" />
-                Add Stock
-              </Button>
-
-              <Button onClick={handleSendToService} variant="outline">
-                <Wrench className="h-4 w-4 mr-2" />
-                Send to Service
               </Button>
             </div>
           </div>

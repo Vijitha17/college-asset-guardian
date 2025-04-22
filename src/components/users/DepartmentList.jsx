@@ -1,4 +1,3 @@
-
 import React from "react";
 import { 
   Table, 
@@ -17,7 +16,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { 
-  Plus,
   MoreHorizontal, 
   Edit, 
   Trash,
@@ -46,13 +44,6 @@ const DepartmentList = () => {
   
   return (
     <div className="space-y-4">
-      <div className="flex justify-end">
-        <Button onClick={handleAddDepartment}>
-          <Plus className="h-4 w-4 mr-2" />
-          Add Department
-        </Button>
-      </div>
-      
       <div className="bg-white rounded-lg shadow">
         <Table>
           <TableHeader>
