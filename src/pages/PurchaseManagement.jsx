@@ -16,11 +16,13 @@ import {
 import PurchaseRequestList from "@/components/purchase/PurchaseRequestList";
 import PurchaseList from "@/components/purchase/PurchaseList";
 import PurchaseForm from "@/components/purchase/PurchaseForm";
+import { useToast } from "@/hooks/use-toast";
 
 const PurchaseManagement = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const navigate = useNavigate();
+  const { toast } = useToast();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -32,6 +34,15 @@ const PurchaseManagement = () => {
 
   const handleCreateRequest = () => {
     navigate('/purchase/create-request');
+  };
+
+  const handleSavePurchase = () => {
+    // In a real app, you would save the purchase details to a database
+    toast({
+      title: "Purchase created successfully",
+      description: "The purchase has been saved to the system."
+    });
+    setIsCreating(false);
   };
   
   return (
@@ -70,9 +81,14 @@ const PurchaseManagement = () => {
               )}
               
               {isCreating && (
-                <Button variant="outline" onClick={() => setIsCreating(false)}>
-                  Cancel
-                </Button>
+                <>
+                  <Button onClick={handleSavePurchase}>
+                    Save Purchase
+                  </Button>
+                  <Button variant="outline" onClick={() => setIsCreating(false)}>
+                    Cancel
+                  </Button>
+                </>
               )}
             </div>
           </div>

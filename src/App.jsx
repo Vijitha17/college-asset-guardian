@@ -30,6 +30,11 @@ import IncomingRequests from "./components/movement/IncomingRequests";
 import HandoverManagement from "./components/movement/HandoverManagement";
 import ReturnsManagement from "./components/movement/ReturnsManagement";
 import MovementHistory from "./components/movement/MovementHistory";
+import AddStockForm from "./components/stock/AddStockForm";
+import ServiceStockForm from "./components/stock/ServiceStockForm";
+import CreatePurchaseRequest from "./components/purchase/CreatePurchaseRequest";
+import AddCollegeForm from "./components/users/AddCollegeForm";
+import AddDepartmentForm from "./components/users/AddDepartmentForm";
 
 const queryClient = new QueryClient();
 

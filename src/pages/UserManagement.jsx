@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -10,7 +11,8 @@ import {
   Filter, 
   User, 
   Building, 
-  BookOpen 
+  BookOpen,
+  UserPlus
 } from "lucide-react";
 import UserList from "@/components/users/UserList";
 import UserForm from "@/components/users/UserForm";
@@ -24,6 +26,10 @@ const UserManagement = () => {
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleAddUser = () => {
+    navigate('/users/create');
   };
 
   const handleAddCollege = () => {
@@ -54,6 +60,11 @@ const UserManagement = () => {
                   className="pl-8 pr-4 py-2 w-full rounded-md border border-input bg-background"
                 />
               </div>
+              
+              <Button onClick={handleAddUser}>
+                <UserPlus className="h-4 w-4 mr-2" />
+                Add User
+              </Button>
             </div>
           </div>
           
