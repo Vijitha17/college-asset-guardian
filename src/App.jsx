@@ -48,9 +48,13 @@ const App = () => (
           {/* User management routes */}
           <Route path="/users" element={<UserManagement />} />
           <Route path="/users/create" element={<CreateUserForm />} />
+          <Route path="/users/add-college" element={<AddCollegeForm />} />
+          <Route path="/users/add-department" element={<AddDepartmentForm />} />
           
           <Route path="/requirement/*" element={<Requirements />} />
           <Route path="/stock" element={<StockManagement />} />
+          <Route path="/stock/add" element={<AddStockForm />} />
+          <Route path="/stock/service" element={<ServiceStockForm />} />
           <Route path="/stock/view/:id" element={<StockView />} />
           <Route path="/stock/edit/:id" element={<EditStockForm />} />
           <Route path="/stock/allocate/:id" element={<AllocateStockForm />} />
@@ -67,6 +71,7 @@ const App = () => (
           <Route path="/vendor/*" element={<VendorManagement />} />
           <Route path="/vendor/view/:id" element={<VendorView />} />
           <Route path="/purchase/*" element={<PurchaseManagement />} />
+          <Route path="/purchase/create-request" element={<CreatePurchaseRequest />} />
           <Route path="/expenditure/*" element={<ExpenditureManagement />} />
           <Route path="/request/list" element={<RequestList />} />
           <Route path="/request/approval" element={<RequestApproval />} />

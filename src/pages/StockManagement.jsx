@@ -1,4 +1,6 @@
+
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,7 +11,9 @@ import {
   Package, 
   Share2, 
   Settings,
-  Wrench
+  Wrench,
+  Plus,
+  Send
 } from "lucide-react";
 import StockList from "@/components/stock/StockList";
 import AllocatedStockList from "@/components/stock/AllocatedStockList";
@@ -18,9 +22,18 @@ import ServiceStockList from "@/components/stock/ServiceStockList";
 const StockManagement = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
+  const navigate = useNavigate();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleAddStock = () => {
+    navigate('/stock/add');
+  };
+
+  const handleSendToService = () => {
+    navigate('/stock/service');
   };
   
   return (
@@ -44,6 +57,16 @@ const StockManagement = () => {
                 />
               </div>
               
+              <Button onClick={handleAddStock}>
+                <Plus className="h-4 w-4 mr-2" />
+                Add Stock
+              </Button>
+              
+              <Button onClick={handleSendToService} variant="outline">
+                <Send className="h-4 w-4 mr-2" />
+                Send to Service
+              </Button>
+
               <Button 
                 variant="outline" 
                 size="icon" 

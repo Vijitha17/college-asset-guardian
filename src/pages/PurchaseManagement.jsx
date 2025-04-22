@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -10,6 +11,7 @@ import {
   CheckCircle, 
   History,
   Search,
+  Plus
 } from "lucide-react";
 import PurchaseRequestList from "@/components/purchase/PurchaseRequestList";
 import PurchaseList from "@/components/purchase/PurchaseList";
@@ -18,9 +20,18 @@ import PurchaseForm from "@/components/purchase/PurchaseForm";
 const PurchaseManagement = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
+  const navigate = useNavigate();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleCreatePurchase = () => {
+    setIsCreating(true);
+  };
+
+  const handleCreateRequest = () => {
+    navigate('/purchase/create-request');
   };
   
   return (
@@ -43,6 +54,20 @@ const PurchaseManagement = () => {
                   className="pl-8 pr-4 py-2 w-full rounded-md border border-input bg-background"
                 />
               </div>
+              
+              {!isCreating && (
+                <>
+                  <Button onClick={handleCreatePurchase}>
+                    <ShoppingCart className="h-4 w-4 mr-2" />
+                    Create Purchase
+                  </Button>
+                  
+                  <Button onClick={handleCreateRequest} variant="outline">
+                    <FileText className="h-4 w-4 mr-2" />
+                    Create Request
+                  </Button>
+                </>
+              )}
               
               {isCreating && (
                 <Button variant="outline" onClick={() => setIsCreating(false)}>

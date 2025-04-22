@@ -1,5 +1,5 @@
-
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -20,9 +20,18 @@ import DepartmentList from "@/components/users/DepartmentList";
 const UserManagement = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
+  const navigate = useNavigate();
   
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleAddCollege = () => {
+    navigate('/users/add-college');
+  };
+
+  const handleAddDepartment = () => {
+    navigate('/users/add-department');
   };
   
   return (
@@ -45,57 +54,49 @@ const UserManagement = () => {
                   className="pl-8 pr-4 py-2 w-full rounded-md border border-input bg-background"
                 />
               </div>
-              
-              {!isCreating && (
-                <Button onClick={() => setIsCreating(true)}>
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add User
-                </Button>
-              )}
-              
-              {isCreating && (
-                <Button variant="outline" onClick={() => setIsCreating(false)}>
-                  Cancel
-                </Button>
-              )}
             </div>
           </div>
           
-          {isCreating ? (
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold mb-4">Create New User</h2>
-              <UserForm onCancel={() => setIsCreating(false)} />
-            </div>
-          ) : (
-            <Tabs defaultValue="users" className="space-y-4">
-              <TabsList>
-                <TabsTrigger value="users" className="flex items-center">
-                  <User className="h-4 w-4 mr-2" />
-                  Users
-                </TabsTrigger>
-                <TabsTrigger value="colleges" className="flex items-center">
-                  <Building className="h-4 w-4 mr-2" />
-                  Colleges
-                </TabsTrigger>
-                <TabsTrigger value="departments" className="flex items-center">
-                  <BookOpen className="h-4 w-4 mr-2" />
-                  Departments
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="users" className="space-y-4">
-                <UserList />
-              </TabsContent>
-              
-              <TabsContent value="colleges" className="space-y-4">
-                <CollegeList />
-              </TabsContent>
-              
-              <TabsContent value="departments" className="space-y-4">
-                <DepartmentList />
-              </TabsContent>
-            </Tabs>
-          )}
+          <Tabs defaultValue="users" className="space-y-4">
+            <TabsList>
+              <TabsTrigger value="users" className="flex items-center">
+                <User className="h-4 w-4 mr-2" />
+                Users
+              </TabsTrigger>
+              <TabsTrigger value="colleges" className="flex items-center">
+                <Building className="h-4 w-4 mr-2" />
+                Colleges
+              </TabsTrigger>
+              <TabsTrigger value="departments" className="flex items-center">
+                <BookOpen className="h-4 w-4 mr-2" />
+                Departments
+              </TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="users" className="space-y-4">
+              <UserList />
+            </TabsContent>
+            
+            <TabsContent value="colleges" className="space-y-4">
+              <div className="flex justify-end mb-4">
+                <Button onClick={handleAddCollege}>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add College
+                </Button>
+              </div>
+              <CollegeList />
+            </TabsContent>
+            
+            <TabsContent value="departments" className="space-y-4">
+              <div className="flex justify-end mb-4">
+                <Button onClick={handleAddDepartment}>
+                  <Plus className="h-4 w-4 mr-2" />
+                  Add Department
+                </Button>
+              </div>
+              <DepartmentList />
+            </TabsContent>
+          </Tabs>
         </main>
       </div>
     </div>

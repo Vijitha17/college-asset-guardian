@@ -10,12 +10,6 @@ const Index = () => {
         <div className="flex items-center">
           <span className="text-2xl font-bold text-college-800">CollegeIMS</span>
         </div>
-        
-        <Link to="/login">
-          <Button variant="outline" className="text-college-700 border-college-300 hover:bg-college-100 hover:text-college-800">
-            Login
-          </Button>
-        </Link>
       </header>
       
       <main className="flex-1 container mx-auto px-4 py-12 flex flex-col md:flex-row items-center justify-center gap-12">
